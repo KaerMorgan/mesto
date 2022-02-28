@@ -1,0 +1,12 @@
+.profile-info__occupation {
+  padding: 0;
+  margin: 0;
+  grid-row-start: 2;
+  height: 18px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+}

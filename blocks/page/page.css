@@ -4,6 +4,7 @@
   height: 100%;
   color: #fff;
   position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
 @media screen and (max-width: 1000px) {

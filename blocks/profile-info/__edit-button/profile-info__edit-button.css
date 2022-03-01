@@ -6,4 +6,10 @@
   height: 24px;
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  transition: all .5s;
+}
+
+.profile-info__edit-button:hover {
+  opacity: .6;
 }

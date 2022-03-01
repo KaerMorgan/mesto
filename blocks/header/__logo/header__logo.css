@@ -6,3 +6,9 @@
 .header__logo path {
   fill: #fff;
 }
+
+@media screen and (max-width: 950px) {
+  .header__logo {
+    margin: 0 0 32px 27px;
+  }
+}

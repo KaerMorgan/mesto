@@ -3,4 +3,9 @@
   top: -40px;
   right: -40px;
   cursor: pointer;
+  transition: all 0.5s;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
 }

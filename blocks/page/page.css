@@ -5,3 +5,9 @@
   color: #fff;
   position: relative;
 }
+
+@media screen and (max-width: 1000px) {
+  .page {
+    width: 100%;
+  }
+}

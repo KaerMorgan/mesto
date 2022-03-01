@@ -6,4 +6,16 @@
   background-color: transparent;
   border: 1px solid #fff;
   border-radius: 2px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.profile__button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 950px) {
+  .profile__button {
+    width: 282px;
+  }
 }

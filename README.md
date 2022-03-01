@@ -6,4 +6,4 @@
 
 В планах найти способ работать с тегом *SVG* и создать на основе этого сайта полноценное веб-приложение с лайками и добавлением карточек.
 
-Ссылка на GitHub Pages рабочей ветки: https://kaermorgan.github.io/mesto/index.html
+Ссылка на GitHub Pages: https://kaermorgan.github.io/mesto/index.html

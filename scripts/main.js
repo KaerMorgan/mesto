@@ -23,7 +23,7 @@ popupClose.addEventListener('click', function() {
   occupationInput.value = occupation.textContent;
 });
 
-// хитрый трюк которому я научился на проекте :)
+// хитрый трюк которому я научился на стороннем проекте :)
 document.addEventListener('click', (e) => {
   if (e.target === popup) {
     popup.classList.remove('popup__opened');
@@ -39,12 +39,18 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-// через айди, потому что пытался заставить работать по крайней мере одну
-let like = document.querySelector('#element__like')
-like.addEventListener("mouseover", function() {
-  like.style.fill = 'black';
-});
+//
+//
+//
 
-like.addEventListener("mouseout", function() {
-  like.style.fill = 'none';
+
+
+let elements = document.querySelectorAll('.element__like');
+
+
+elements.forEach(function(item) {
+  item.addEventListener('click', function() {
+    console.log('ну кликнул и что');
+    item.innerHTML = `<img src="./images/liked.png" alt="Мне нравится">`
+  })
 });

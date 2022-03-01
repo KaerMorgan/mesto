@@ -12,5 +12,5 @@
 }
 
 .element__like:active {
-  fill: black;
+  opacity: 1;
 }

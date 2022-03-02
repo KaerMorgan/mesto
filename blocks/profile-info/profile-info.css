@@ -3,7 +3,9 @@
   margin: 0 auto 0 30px;
   display: grid;
   grid-template-rows: repeat(1fr, 2);
+  grid-template-columns: minmax(-webkit-min-content -webkit-max-content) -webkit-min-content;
   grid-template-columns: minmax(min-content max-content) min-content;
+  -moz-column-gap: 18px;
   column-gap: 18px;
   row-gap: 16px;
   align-items: baseline;

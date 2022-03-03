@@ -1,4 +1,4 @@
-.profile-info__edit-button {
+.profile__edit-button {
   grid-column-start: 2;
   margin: 0;
   padding: 0;
@@ -10,12 +10,12 @@
   transition: all .5s;
 }
 
-.profile-info__edit-button:hover {
+.profile__edit-button:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 580px) {
-  .profile-info__edit-button {
+  .profile__edit-button {
     width: 18px;
     height: 18px;
   }

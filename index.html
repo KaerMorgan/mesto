@@ -10,114 +10,86 @@
 </head>
 
 <body class="page">
-
   <header class="header">
-
-    <img src="./images/header__logo.png" alt="Место" class="header__logo">
-
+    <img src="./images/header__logo.svg" alt="Место" class="header__logo">
   </header>
-
   <main class="main">
-
     <section class="profile">
-
       <img src="./images/profile__avatar.png" alt="аватар" class="profile__avatar">
-
       <div class="profile-info">
-        <p class="profile-info__name">Жак-Ив Кусто</p>
+        <h1 class="profile-info__name">Жак-Ив Кусто</h1>
         <p class="profile-info__occupation">Исследователь океана</p>
-        <button class="profile-info__edit-button">
-          <img src="./images/button_edit.png" alt="Редактировать">
+        <button type="button" class="profile-info__edit-button">
+          <img src="./images/button_edit.svg" alt="Редактировать">
         </button>
       </div>
-
-      <button class="profile__button">
-        <img src="./images/button_add.png" alt="Добавить">
+      <button type="button" class="profile__button">
+        <img src="./images/button_add.svg" alt="Добавить">
       </button>
-
-      <div class="popup">
-        <form class="popup__container">
-          <img src="./images/button_close.png" alt="закрыть форму" class="popup__close">
-          <h3 class="popup__heading">Редактировать профиль</h3>
-          <input class="popup__name" type="text" value="Жак-Ив Кусто">
-          <input class="popup__occupation" type="text" value="Исследователь океана">
-          <button class="popup__submit" type="submit">Сохранить</button>
-        </form>
-      </div>
-
     </section>
-
     <section class="elements">
       <ul class="elements__grid">
         <li class="element">
           <img src="./images/karachaevsk__photo.png" alt="Карачевск" class="element__photo">
           <div class="element__group">
-            <p class="element__caption">Карачаевск</p>
-            <button class="element__like">
-              <img src="./images/like_button.png" alt="Мне нравится">
-            </button>
+            <h2 class="element__caption">Карачаевск</h2>
+            <button type="button" class="element__like" aria-label="Мне нравится"></button>
           </div>
         </li>
-
         <li class="element">
           <img src="./images/dombai__photo.png" alt="Карачевск" class="element__photo">
           <div class="element__group">
-            <p class="element__caption">Домбай</p>
-            <button class="element__like">
-              <img src="./images/like_button.png" alt="Мне нравится">
-            </button>
+            <h2 class="element__caption">Домбай</h2>
+            <button type="button" class="element__like" aria-label="Мне нравится"></button>
           </div>
         </li>
-
         <li class="element">
           <img src="./images/elbrus__photo.png" alt="Карачевск" class="element__photo">
           <div class="element__group">
-            <p class="element__caption">Ельбрус</p>
-            <button class="element__like">
-              <img src="./images/like_button.png" alt="Мне нравится">
-            </button>
+            <h2 class="element__caption">Ельбрус</h2>
+            <button type="button" class="element__like" aria-label="Мне нравится"></button>
           </div>
         </li>
-
         <li class="element">
           <img src="./images/beijing.jpg" alt="Карачевск" class="element__photo">
           <div class="element__group">
-            <p class="element__caption">Пекин</p>
-            <button class="element__like">
-              <img src="./images/like_button.png" alt="Мне нравится">
-            </button>
+            <h2 class="element__caption">Пекин</h2>
+            <button type="button" class="element__like" aria-label="Мне нравится"></button>
           </div>
         </li>
-
         <li class="element">
           <img src="./images/paris.jpg" alt="Карачевск" class="element__photo">
           <div class="element__group">
-            <p class="element__caption">Париж</p>
-            <button class="element__like">
-              <img src="./images/like_button.png" alt="Мне нравится">
-            </button>
+            <h2 class="element__caption">Париж</h2>
+            <button type="button" class="element__like" aria-label="Мне нравится"></button>
           </div>
         </li>
-
         <li class="element">
           <img src="./images/san-francisco.jpg" alt="Карачевск" class="element__photo">
           <div class="element__group">
-            <p class="element__caption">Сан-Франциско</p>
-            <button class="element__like">
-              <img src="./images/like_button.png" alt="Мне нравится">
-            </button>
+            <h2 class="element__caption">Сан-Франциско</h2>
+            <button type="button" class="element__like" aria-label="Мне нравится"></button>
           </div>
         </li>
-
       </ul>
     </section>
-
   </main>
-
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
-
+  <div class="popup">
+    <div class="popup__container">
+      <form class="popup__form" name="profile-edit">
+        <button type="button" class="popup__close">
+          <img src="./images/button_close.svg" alt="закрыть форму">
+        </button>
+        <h3 class="popup__heading">Редактировать профиль</h3>
+        <input class="popup__input" id="popup__input-name" name="name" type="text">
+        <input class="popup__input" id="popup__input-occupation" name="occupation" type="text">
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <script src="./scripts/main.js"></script>
 </body>
 

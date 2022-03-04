@@ -40,12 +40,11 @@ function formSubmitHandler(evt) {
 };
 formElement.addEventListener('submit', formSubmitHandler);
 
-// Изменение состояния лайка при нажати,
-// воспользовался перебором через forEach чтобы не писать 8 переменных и слушателей.
+// Изменение состояния лайка при нажатии
 let elements = document.querySelectorAll('.element__like');
 
-elements.forEach(function(item) {
-  item.addEventListener('click', function() {
-    item.classList.toggle('element__like_pressed');
+for (let i = 0; i < elements.length; i++) {
+  elements[i].addEventListener('click', function() {
+    elements[i].classList.toggle('element__like_pressed');
   });
-});
+}

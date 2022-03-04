@@ -10,13 +10,6 @@
   cursor: pointer;
 }
 
-.profile__button img {
-  margin: 0;
-  padding: 0;
-  width: 22px;
-  height: 22px;
-}
-
 .profile__button:hover {
   opacity: 0.6;
 }
@@ -24,9 +17,5 @@
 @media screen and (max-width: 950px) {
   .profile__button {
     width: 282px;
-  }
-  .profile__button img {
-    width: 16px;
-    height: 16px;
   }
 }

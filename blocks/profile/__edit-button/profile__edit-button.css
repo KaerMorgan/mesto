@@ -1,6 +1,7 @@
 .profile__edit-button {
   grid-column-start: 2;
-  margin: 0;
+  /* поскольку на mozilla firefox по какой-то причине не работает align-items: baseline; */
+  margin: 8px auto 0;
   padding: 0;
   width: 24px;
   height: 24px;
@@ -14,8 +15,9 @@
   opacity: .6;
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 950px) {
   .profile__edit-button {
+    margin: 3px auto 0;
     width: 18px;
     height: 18px;
   }

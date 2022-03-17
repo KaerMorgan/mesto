@@ -1,13 +1,13 @@
-let popup = document.querySelector('.popup');
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close')
+const popup = document.querySelector('.popup');
+const editButton = document.querySelector('.profile__edit-button');
+const closeButton = document.querySelector('.popup__close')
 
-let name = document.querySelector('.profile__name');
-let occupation = document.querySelector('.profile__occupation');
+const name = document.querySelector('.profile__name');
+const occupation = document.querySelector('.profile__occupation');
 
-let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('#popup__input-name');
-let occupationInput = formElement.querySelector('#popup__input-occupation');
+const formElement = document.querySelector('.popup__form');
+const nameInput = formElement.querySelector('#popup__input-name');
+const occupationInput = formElement.querySelector('#popup__input-occupation');
 
 // Popup open/close
 function popupOpen() {
@@ -41,7 +41,7 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 // Like button behavior
-let elements = document.querySelectorAll('.element__like');
+const elements = document.querySelectorAll('.element__like');
 
 for (let i = 0; i < elements.length; i++) {
   elements[i].addEventListener('click', function() {
@@ -75,3 +75,21 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+// Template creating variables
+const cardTemplate = document.querySelector('#card').content;
+const cardContainer = document.querySelector('.elements__grid');
+
+
+// Adding intial cards
+initialCards.forEach(function(item, index, array) {
+  const newCard = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardName = newCard.querySelector('.element__caption');
+  const cardPhoto = newCard.querySelector('.element__photo');
+
+
+  cardName.textContent = item.name
+  cardPhoto.src = item.link
+
+  cardContainer.append(newCard);
+})

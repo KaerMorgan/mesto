@@ -4,5 +4,7 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s all;
 }

@@ -3,7 +3,9 @@ const photoPreview = document.querySelector('.photo-view')
 
 const addButton = document.querySelector('.profile__add-button')
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close')
+const closeEditButton = document.querySelector('#popup-edit__close')
+const closeAddButton = document.querySelector('#popup-add__close')
+
 const closePreviewButton = document.querySelector('.photo-view__close')
 
 const name = document.querySelector('.profile__name');
@@ -19,6 +21,24 @@ closePreviewButton.addEventListener('click', function() {
   photoPreview.classList.toggle('photo-view_opened')
 })
 
+xxx
+xxxx
+xxxx
+x
+xxx
+xxxx
+xxxx
+xxxx
+xxxx
+xxxx
+x
+xxxx
+xxxx
+xxxx
+x
+xxxx
+xxx
+xx
 // Popup open/close
 editButton.addEventListener('click', function() {
   popup.classList.toggle('popup_opened');
@@ -33,18 +53,23 @@ addButton.addEventListener('click', function() {
   formAdd.classList.toggle('popup__form_active')
 });
 
-function popupClose() {
-  popup.classList.remove('popup_opened');
-  formEdit.classList.remove('popup__form_active')
-  formAdd.classList.remove('popup__form_active')
+function popupEditClose() {
+  popup.classList.toggle('popup_opened');
+  formEdit.classList.toggle('popup__form_active')
 
   editNameInput.value = name.textContent
   editOccupationInput.value = occupation.textContent
+}
+
+function popupAddClose() {
+  popup.classList.toggle('popup_opened');
+  formAdd.classList.toggle('popup__form_active')
 
   addNameInput.value = ''
   addLinkInput.value = ''
 }
-closeButton.addEventListener('click', popupClose)
+closeEditButton.addEventListener('click', popupEditClose)
+closeAddButton.addEventListener('click', popupAddClose)
 
 // Closing popup by click on wrapper feature
 // document.addEventListener('click', (e) => {
@@ -63,7 +88,7 @@ function formEditSubmitHandler(evt) {
   occupation.textContent = editOccupationInput.value;
 
   //Close popup by submit
-  popupClose()
+  popupEditClose()
 };
 formEdit.addEventListener('submit', formEditSubmitHandler);
 
@@ -179,6 +204,6 @@ function formAddSubmitHandler(evt) {
     evt.target.classList.toggle('element__like_pressed');
   })
 
-  popupClose()
+  popupAddClose()
 };
 formAdd.addEventListener('submit', formAddSubmitHandler);

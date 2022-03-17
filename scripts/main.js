@@ -9,7 +9,7 @@ let formElement = document.querySelector('.popup__form');
 let nameInput = formElement.querySelector('#popup__input-name');
 let occupationInput = formElement.querySelector('#popup__input-occupation');
 
-// открытие и закрытие по кнопке
+// Popup open/close
 function popupOpen() {
   popup.classList.toggle('popup_opened');
 
@@ -19,28 +19,28 @@ function popupOpen() {
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupOpen);
 
-// закрытие попапа по клику на обложку игнорирующее всплытие до формы (не относится к заданию)
+// Closing popup by click on wrapper feature
 // document.addEventListener('click', (e) => {
 //   if (e.target === popup) {
 //     popup.classList.remove('popup_opened');
 //   }
 // });
 
-// сохранение введённых данных
+// Saving input values
 function formSubmitHandler(evt) {
-  // отменяем перезагрузку страницы
+  // Prevent page reload
   evt.preventDefault();
 
-  // перезаписываем данные из инпутов при нажатии
+  // Data rewriting by submit
   name.textContent = nameInput.value;
   occupation.textContent = occupationInput.value;
 
-  //закрываем по нажатию на кнопку "сохранить"
+  //Close popup by click on X
   popupOpen()
 };
 formElement.addEventListener('submit', formSubmitHandler);
 
-// Изменение состояния лайка при нажатии
+// Like button behavior
 let elements = document.querySelectorAll('.element__like');
 
 for (let i = 0; i < elements.length; i++) {
@@ -48,3 +48,30 @@ for (let i = 0; i < elements.length; i++) {
     elements[i].classList.toggle('element__like_pressed');
   });
 }
+
+// Initial load cards array
+const initialCards = [{
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];

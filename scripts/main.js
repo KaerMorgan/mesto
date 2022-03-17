@@ -33,6 +33,9 @@ function popupClose() {
 
   editNameInput.value = name.textContent
   editOccupationInput.value = occupation.textContent
+
+  addNameInput.value = ''
+  addLinkInput.value = ''
 }
 closeButton.addEventListener('click', popupClose)
 
@@ -94,16 +97,29 @@ initialCards.forEach(function(item, index, array) {
   const newCard = cardTemplate.querySelector('.element').cloneNode(true);
   const cardName = newCard.querySelector('.element__caption');
   const cardPhoto = newCard.querySelector('.element__photo');
+  const deleteButton = newCard.querySelector('.element__delete')
 
+  deleteButton.addEventListener('click', function() {
+    newCard.remove()
+  });
 
-  cardName.textContent = item.name
-  cardPhoto.src = item.link
+  cardName.textContent = item.name;
+  cardPhoto.src = item.link;
 
   cardContainer.append(newCard);
 })
 
-// Adding new cards
+// Like button behavior
+const likeButtons = document.querySelectorAll('.element__like');
 
+likeButtons.forEach(function(item) {
+  item.addEventListener('click', function() {
+    item.classList.toggle('element__like_pressed');
+  });
+});
+
+
+// Adding new cards
 const addNameInput = formAdd.querySelector('#add-input-name');
 const addLinkInput = formAdd.querySelector('#add-input-link');
 
@@ -111,30 +127,27 @@ const addLinkInput = formAdd.querySelector('#add-input-link');
 function formAddSubmitHandler(evt) {
   // Prevent page reload
   evt.preventDefault();
+
   // Adding new card
-
-
   const newCard = cardTemplate.querySelector('.element').cloneNode(true);
   const cardName = newCard.querySelector('.element__caption');
   const cardPhoto = newCard.querySelector('.element__photo');
+  const likeButton = newCard.querySelector('.element__like');
+  const deleteButton = newCard.querySelector('.element__delete')
 
+  deleteButton.addEventListener('click', function() {
+    newCard.remove()
+  });
   cardName.textContent = addNameInput.value
   cardPhoto.src = addLinkInput.value
 
   cardContainer.prepend(newCard);
 
+  // Add like button behavior on new card
+  likeButton.addEventListener('click', function(evt) {
+    evt.target.classList.toggle('element__like_pressed');
+  })
+
   popupClose()
 };
 formAdd.addEventListener('submit', formAddSubmitHandler);
-
-
-// Like button behavior
-// const likes = document.querySelectorAll('.element__like');
-
-// likes.forEach()
-
-// for (let i = 0; i < elements.length; i++) {
-//   elements[i].addEventListener('click', function() {
-//     elements[i].classList.toggle('element__like_pressed');
-//   });
-// }

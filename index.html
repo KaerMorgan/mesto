@@ -26,8 +26,8 @@
           <img class="profile__edit-image" src="./images/button_edit.svg" alt="Редактировать">
         </button>
       </div>
-      <button type="button" class="profile__button">
-        <img class="profile__button-icon" src="./images/button_add.svg" alt="Добавить">
+      <button type="button" class="profile__add-button">
+        <img class="profile__add-button-icon" src="./images/button_add.svg" alt="Добавить">
       </button>
     </section>
     <section class="elements">
@@ -40,14 +40,20 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <form class="popup__form" name="profile-edit">
-        <button type="button" class="popup__close">
-          <img class="popup__close-icon" src="./images/button_close.svg" alt="закрыть форму">
-        </button>
+      <button type="button" class="popup__close">
+        <img class="popup__close-icon" src="./images/button_close.svg" alt="закрыть форму">
+      </button>
+      <form class="popup__form popup__form-edit" name="profile-edit">
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <input class="popup__input" id="popup__input-name" name="name" type="text">
-        <input class="popup__input" id="popup__input-occupation" name="occupation" type="text">
+        <input class="popup__input" id="edit-input-name" name="name" type="text">
+        <input class="popup__input" id="edit-input-occupation" name="occupation" type="text">
         <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+      <form class="popup__form popup__form-add" name="profile-add">
+        <h3 class="popup__heading">Новое место</h3>
+        <input class="popup__input" id="add-input-name" name="name" type="text" placeholder="Название">
+        <input class="popup__input" id="add-input-link" name="link" type="text" placeholder="Ссылка на картинку">
+        <button class="popup__submit" type="submit">Создать</button>
       </form>
     </div>
   </div>

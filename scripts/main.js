@@ -1,23 +1,40 @@
 const popup = document.querySelector('.popup');
+
+const addButton = document.querySelector('.profile__add-button')
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close')
 
 const name = document.querySelector('.profile__name');
 const occupation = document.querySelector('.profile__occupation');
 
-const formElement = document.querySelector('.popup__form');
-const nameInput = formElement.querySelector('#popup__input-name');
-const occupationInput = formElement.querySelector('#popup__input-occupation');
+const formEdit = document.querySelector('.popup__form-edit')
+const formAdd = document.querySelector('.popup__form-add')
+const editNameInput = formEdit.querySelector('#edit-input-name');
+const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
 
 // Popup open/close
-function popupOpen() {
+editButton.addEventListener('click', function() {
   popup.classList.toggle('popup_opened');
+  formEdit.classList.toggle('popup__form_active')
 
-  nameInput.value = name.textContent
-  occupationInput.value = occupation.textContent
+  editNameInput.value = name.textContent
+  editOccupationInput.value = occupation.textContent
+});
+
+addButton.addEventListener('click', function() {
+  popup.classList.toggle('popup_opened');
+  formAdd.classList.toggle('popup__form_active')
+});
+
+function popupClose() {
+  popup.classList.remove('popup_opened');
+  formEdit.classList.remove('popup__form_active')
+  formAdd.classList.remove('popup__form_active')
+
+  editNameInput.value = name.textContent
+  editOccupationInput.value = occupation.textContent
 }
-editButton.addEventListener('click', popupOpen);
-closeButton.addEventListener('click', popupOpen);
+closeButton.addEventListener('click', popupClose)
 
 // Closing popup by click on wrapper feature
 // document.addEventListener('click', (e) => {
@@ -27,27 +44,18 @@ closeButton.addEventListener('click', popupOpen);
 // });
 
 // Saving input values
-function formSubmitHandler(evt) {
+function formEditSubmitHandler(evt) {
   // Prevent page reload
   evt.preventDefault();
 
   // Data rewriting by submit
-  name.textContent = nameInput.value;
-  occupation.textContent = occupationInput.value;
+  name.textContent = editNameInput.value;
+  occupation.textContent = editOccupationInput.value;
 
-  //Close popup by click on X
-  popupOpen()
+  //Close popup by submit
+  popupClose()
 };
-formElement.addEventListener('submit', formSubmitHandler);
-
-// Like button behavior
-const elements = document.querySelectorAll('.element__like');
-
-for (let i = 0; i < elements.length; i++) {
-  elements[i].addEventListener('click', function() {
-    elements[i].classList.toggle('element__like_pressed');
-  });
-}
+formEdit.addEventListener('submit', formEditSubmitHandler);
 
 // Initial load cards array
 const initialCards = [{
@@ -93,3 +101,40 @@ initialCards.forEach(function(item, index, array) {
 
   cardContainer.append(newCard);
 })
+
+// Adding new cards
+
+const addNameInput = formAdd.querySelector('#add-input-name');
+const addLinkInput = formAdd.querySelector('#add-input-link');
+
+// Saving input values
+function formAddSubmitHandler(evt) {
+  // Prevent page reload
+  evt.preventDefault();
+  // Adding new card
+
+
+  const newCard = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardName = newCard.querySelector('.element__caption');
+  const cardPhoto = newCard.querySelector('.element__photo');
+
+  cardName.textContent = addNameInput.value
+  cardPhoto.src = addLinkInput.value
+
+  cardContainer.prepend(newCard);
+
+  popupClose()
+};
+formAdd.addEventListener('submit', formAddSubmitHandler);
+
+
+// Like button behavior
+// const likes = document.querySelectorAll('.element__like');
+
+// likes.forEach()
+
+// for (let i = 0; i < elements.length; i++) {
+//   elements[i].addEventListener('click', function() {
+//     elements[i].classList.toggle('element__like_pressed');
+//   });
+// }

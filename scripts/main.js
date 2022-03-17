@@ -1,8 +1,10 @@
 const popup = document.querySelector('.popup');
+const photoPreview = document.querySelector('.photo-view')
 
 const addButton = document.querySelector('.profile__add-button')
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close')
+const closePreviewButton = document.querySelector('.photo-view__close')
 
 const name = document.querySelector('.profile__name');
 const occupation = document.querySelector('.profile__occupation');
@@ -11,6 +13,11 @@ const formEdit = document.querySelector('.popup__form-edit')
 const formAdd = document.querySelector('.popup__form-add')
 const editNameInput = formEdit.querySelector('#edit-input-name');
 const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
+
+// Photo-preview open/close
+closePreviewButton.addEventListener('click', function() {
+  photoPreview.classList.toggle('photo-view_opened')
+})
 
 // Popup open/close
 editButton.addEventListener('click', function() {
@@ -99,6 +106,18 @@ initialCards.forEach(function(item, index, array) {
   const cardPhoto = newCard.querySelector('.element__photo');
   const deleteButton = newCard.querySelector('.element__delete')
 
+  // Adding preview function
+  cardPhoto.addEventListener('click', function(evt) {
+    photoPreview.classList.toggle('photo-view_opened');
+
+    const photoPreviewImage = photoPreview.querySelector('.photo-view__image');
+    const photoPreviewCaption = photoPreview.querySelector('.photo-view__caption');
+
+    photoPreviewImage.src = evt.target.src
+    photoPreviewCaption.textContent = cardName.textContent
+  })
+
+  // Delete card function
   deleteButton.addEventListener('click', function() {
     newCard.remove()
   });
@@ -109,6 +128,7 @@ initialCards.forEach(function(item, index, array) {
   cardContainer.append(newCard);
 })
 
+
 // Like button behavior
 const likeButtons = document.querySelectorAll('.element__like');
 
@@ -117,7 +137,6 @@ likeButtons.forEach(function(item) {
     item.classList.toggle('element__like_pressed');
   });
 });
-
 
 // Adding new cards
 const addNameInput = formAdd.querySelector('#add-input-name');
@@ -135,6 +154,18 @@ function formAddSubmitHandler(evt) {
   const likeButton = newCard.querySelector('.element__like');
   const deleteButton = newCard.querySelector('.element__delete')
 
+  // Adding preview function
+  cardPhoto.addEventListener('click', function(evt) {
+    photoPreview.classList.toggle('photo-view_opened');
+
+    const photoPreviewImage = photoPreview.querySelector('.photo-view__image');
+    const photoPreviewCaption = photoPreview.querySelector('.photo-view__caption');
+
+    photoPreviewImage.src = evt.target.src
+    photoPreviewCaption.textContent = cardName.textContent
+  })
+
+  // Add delete function on new card
   deleteButton.addEventListener('click', function() {
     newCard.remove()
   });

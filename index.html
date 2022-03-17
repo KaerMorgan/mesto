@@ -57,6 +57,16 @@
       </form>
     </div>
   </div>
+  <!-- Задний фон у попапов имеет разные стили, поэтому создам отдельный враппер для просмотра фото -->
+  <div class="photo-view">
+    <div class="photo-view__container">
+      <button class="photo-view__close">
+      <img class="photo-view__close-icon" src="./images/button_close.svg" alt="закрыть форму">
+      </button>
+      <img src="" alt="Фото места" class="photo-view__image">
+      <h3 class="photo-view__caption"></h3>
+    </div>
+  </div>
   <template id="card">
     <li class="element">
       <img src="" alt="Фото места" class="element__photo">

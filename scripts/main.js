@@ -1,9 +1,12 @@
-const popup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup_type-edit');
+const popupAdd = document.querySelector('.popup_type-add');
 const photoPreview = document.querySelector('.photo-view')
 
 const addButton = document.querySelector('.profile__add-button')
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close')
+
+const closeEditButton = popupEdit.querySelector('.popup__close')
+const closeAddButton = popupAdd.querySelector('.popup__close')
 const closePreviewButton = document.querySelector('.photo-view__close')
 
 const name = document.querySelector('.profile__name');
@@ -21,20 +24,19 @@ closePreviewButton.addEventListener('click', function() {
 
 // Popup open/close
 editButton.addEventListener('click', function() {
-  popup.classList.toggle('popup_opened');
-  formEdit.classList.toggle('popup__form_active')
+  popupEdit.classList.toggle('popup_opened');
 
   editNameInput.value = name.textContent
   editOccupationInput.value = occupation.textContent
 });
 
 addButton.addEventListener('click', function() {
-  popup.classList.toggle('popup_opened');
-  formAdd.classList.toggle('popup__form_active')
+  popupAdd.classList.toggle('popup_opened');
 });
 
 function popupClose() {
-  popup.classList.remove('popup_opened');
+  popupEdit.classList.remove('popup_opened');
+  popupAdd.classList.remove('popup_opened');
   formEdit.classList.remove('popup__form_active')
   formAdd.classList.remove('popup__form_active')
 
@@ -44,7 +46,8 @@ function popupClose() {
   addNameInput.value = ''
   addLinkInput.value = ''
 }
-closeButton.addEventListener('click', popupClose)
+closeEditButton.addEventListener('click', popupClose);
+closeAddButton.addEventListener('click', popupClose);
 
 // Closing popup by click on wrapper feature
 // document.addEventListener('click', (e) => {

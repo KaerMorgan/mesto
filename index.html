@@ -38,7 +38,8 @@
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
-  <div class="popup">
+
+  <div class="popup popup_type-edit">
     <div class="popup__container">
       <button type="button" class="popup__close">
         <img class="popup__close-icon" src="./images/button_close.svg" alt="закрыть форму">
@@ -49,6 +50,14 @@
         <input class="popup__input" id="edit-input-occupation" name="occupation" type="text">
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type-add">
+    <div class="popup__container">
+      <button type="button" class="popup__close">
+        <img class="popup__close-icon" src="./images/button_close.svg" alt="закрыть форму">
+      </button>
       <form class="popup__form popup__form-add" name="profile-add">
         <h3 class="popup__heading">Новое место</h3>
         <input class="popup__input" id="add-input-name" name="name" type="text" placeholder="Название">
@@ -57,7 +66,7 @@
       </form>
     </div>
   </div>
-  <!-- Задний фон у попапов имеет разные стили, поэтому создам отдельный враппер для просмотра фото -->
+
   <div class="photo-view">
     <div class="photo-view__container">
       <button class="photo-view__close">
@@ -67,6 +76,7 @@
       <h3 class="photo-view__caption"></h3>
     </div>
   </div>
+
   <template id="card">
     <li class="element">
       <img src="" alt="Фото места" class="element__photo">

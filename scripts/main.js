@@ -37,8 +37,6 @@ addButton.addEventListener('click', function() {
 function popupClose() {
   popupEdit.classList.remove('popup_opened');
   popupAdd.classList.remove('popup_opened');
-  formEdit.classList.remove('popup__form_active')
-  formAdd.classList.remove('popup__form_active')
 
   editNameInput.value = name.textContent
   editOccupationInput.value = occupation.textContent

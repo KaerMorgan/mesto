@@ -1,5 +1,5 @@
-const popupEdit = document.querySelector('.popup_type-edit');
-const popupAdd = document.querySelector('.popup_type-add');
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupAdd = document.querySelector('.popup_type_add');
 const photoPreview = document.querySelector('.photo-view')
 
 const addButton = document.querySelector('.profile__add-button')

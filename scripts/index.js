@@ -1,4 +1,4 @@
-///// переменные
+///// переменные ////////////////////////////////////////////////////////////////
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const photoPreview = document.querySelector('.photo-view')
@@ -22,9 +22,6 @@ const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
 const cardTemplate = document.querySelector('#card').content;
 const cardContainer = document.querySelector('.elements__grid');
 
-// Like button behavior
-const likeButtons = document.querySelectorAll('.element__like');
-
 // Adding new cards
 const addNameInput = formAdd.querySelector('#add-input-name');
 const addLinkInput = formAdd.querySelector('#add-input-link');
@@ -36,7 +33,7 @@ const addLinkInput = formAdd.querySelector('#add-input-link');
 
 
 
-///// функции
+/// функции ////////////////////////////////////////////////////////////////
 
 function openPopup(item) {
   editNameInput.value = name.textContent
@@ -50,7 +47,6 @@ function closePopup(item) {
 }
 
 
-// Saving input values
 function formEditSubmitHandler(evt) {
   // Prevent page reload
   evt.preventDefault();
@@ -63,29 +59,70 @@ function formEditSubmitHandler(evt) {
   closePopup(popupEdit)
 };
 
+function likeCard(evt) {
+  evt.target.classList.toggle('element__like_pressed');
+}
+
+// function deleteCard(evt) {
+//   evt.target.closest('.element').remove();
+// }
+
+// function previewCard(evt) {
+
+//   const photoPreviewImage = photoPreview.querySelector('.photo-view__image');
+//   const photoPreviewCaption = photoPreview.querySelector('.photo-view__caption');
+
+//   photoPreviewImage.src = evt.target.src;
+//   photoPreviewImage.alt = cardName.textContent;
+//   photoPreviewCaption.textContent = cardName.textContent;
+
+//   openPopup(photoPreview);
+// }
+
+function createCard(item) {
+  const newCard = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardName = newCard.querySelector('.element__caption');
+  const cardPhoto = newCard.querySelector('.element__photo');
+  const likeButton = newCard.querySelector('.element__like');
+  const deleteButton = newCard.querySelector('.element__delete')
+
+  // cardPhoto.addEventListener('click', previewCard);
+
+  likeButton.addEventListener('click', likeCard);
+
+  // deleteButton.addEventListener('click', deleteCard);
+
+  cardName.textContent = item.name;
+  cardPhoto.src = item.link;
+  cardPhoto.alt = item.name;
+
+  return newCard;
+};
+
+function renderCard(card) {
+  cardContainer.append(card);
+
+}
 
 
 
 
+// function formAddSubmitHandler(evt) {
+//   evt.preventDefault();
 
+//   cardName.textContent = addNameInput.value
+//   cardPhoto.src = addLinkInput.value
 
+//   closePopup(popupAdd)
+// };
 
+initialCards.forEach(function(item, index, array) {
 
+  renderCard(createCard(item))
 
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-///// обработчики
+///// обработчики ////////////////////////////////////////////////////////////////
 editButton.addEventListener('click', function() {
   openPopup(popupEdit);
 });
@@ -108,3 +145,5 @@ closePreviewButton.addEventListener('click', function() {
 });
 
 formEdit.addEventListener('submit', formEditSubmitHandler);
+
+// formAdd.addEventListener('submit', formAddSubmitHandler);

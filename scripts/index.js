@@ -36,7 +36,8 @@ const addLinkInput = formAdd.querySelector('#add-input-link');
 const photoPreviewImage = photoPreview.querySelector('.photo-view__image');
 const photoPreviewCaption = photoPreview.querySelector('.photo-view__caption');
 
-
+// variable
+const cardData = {}
 
 function openPopup(item) {
   item.classList.add('popup_opened');
@@ -54,12 +55,11 @@ function deleteCard(evt) {
   evt.target.closest('.element').remove();
 }
 
-function previewCard(evt) {
-  const thisCard = evt.target.closest('.element');
-
-  photoPreviewImage.src = evt.target.src;
-  photoPreviewImage.alt = thisCard.querySelector('.element__caption').textContent;
-  photoPreviewCaption.textContent = thisCard.querySelector('.element__caption').textContent;
+function previewCard(item) {
+  // 👍
+  photoPreviewImage.src = item.link;
+  photoPreviewImage.alt = item.name;
+  photoPreviewCaption.textContent = item.name;
 
   openPopup(photoPreview);
 }
@@ -71,7 +71,7 @@ function createCard(item) {
   const likeButton = newCard.querySelector('.element__like');
   const deleteButton = newCard.querySelector('.element__delete')
 
-  cardPhoto.addEventListener('click', previewCard);
+  cardPhoto.addEventListener('click', () => previewCard(item));
   likeButton.addEventListener('click', likeCard);
   deleteButton.addEventListener('click', deleteCard);
 
@@ -83,7 +83,7 @@ function createCard(item) {
 };
 
 function renderCard(card) {
-  cardContainer.prepend(card);
+  cardContainer.prepend(createCard(card));
 }
 
 function formEditSubmitHandler(evt) {
@@ -101,16 +101,15 @@ function formEditSubmitHandler(evt) {
 function formAddSubmitHandler(evt) {
   evt.preventDefault();
 
-  const addedCard = {
-    name: addNameInput.value,
-    link: addLinkInput.value
-  };
-  renderCard(createCard(addedCard));
+  cardData.name = addNameInput.value;
+  cardData.link = addLinkInput.value;
+
+  renderCard(cardData);
   closePopup(popupAdd);
 };
 
 initialCards.forEach(function(item, index, array) {
-  renderCard(createCard(item))
+  renderCard(item)
 });
 
 
@@ -131,17 +130,13 @@ addButton.addEventListener('click', function() {
   openPopup(popupAdd);
 });
 
-closeEditButton.addEventListener('click', function() {
-  closePopup(popupEdit);
-});
 
-closeAddButton.addEventListener('click', function() {
-  closePopup(popupAdd);
-});
+// Я никак не мог добавить колбэку аргумент не вызвав его сразу, но так работает, спасибо!
+closeEditButton.addEventListener('click', () => closePopup(popupEdit));
 
-closePreviewButton.addEventListener('click', function() {
-  closePopup(photoPreview);
-});
+closeAddButton.addEventListener('click', () => closePopup(popupAdd));
+
+closePreviewButton.addEventListener('click', () => closePopup(photoPreview));
 
 formEdit.addEventListener('submit', formEditSubmitHandler);
 formAdd.addEventListener('submit', formAddSubmitHandler);

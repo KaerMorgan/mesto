@@ -46,14 +46,14 @@
       <form class="popup__form popup__form_type_edit" name="profile-edit" novalidate>
         <h3 class="popup__heading">Редактировать профиль</h3>
         <label class="popup__field">
-          <input required class="popup__input" id="edit-input-name" name="name" type="text">
-          <span class="popup__input-error edit-input-name-error popup__input-error_active">Ошибка</span>
+          <input required class="popup__input" id="edit-input-name" name="name" type="text" minlength="2" maxlength="40">
+          <span class="popup__input-error edit-input-name-error"></span>
         </label>
         <label class="popup__field">
-          <input required class="popup__input" id="edit-input-occupation" name="occupation" type="text">
-          <span class="popup__input-error edit-input-occupation-error popup__input-error_active">Ошибка</span>
+          <input required class="popup__input" id="edit-input-occupation" name="occupation" type="text" minlength="2" maxlength="200">
+          <span class="popup__input-error edit-input-occupation-error"></span>
         </label>
-        <button class="popup__submit popup__submit_disabled" type="submit">Сохранить</button>
+        <button class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -65,14 +65,14 @@
       <form class="popup__form popup__form_type_add" name="profile-add" novalidate>
         <h3 class="popup__heading">Новое место</h3>
         <label class="popup__field">
-          <input required class="popup__input" id="add-input-name" name="name" type="text" placeholder="Название">
-          <span class="popup__input-error add-input-name-error popup__input-error_active">Ошибка</span>
+          <input required class="popup__input" id="add-input-name" name="name" type="text" placeholder="Название"  minlength="2" maxlength="40">
+          <span class="popup__input-error add-input-name-error"></span>
         </label>
         <label class="popup__field">
           <input required class="popup__input" id="add-input-link" name="link" type="url" placeholder="Ссылка на картинку">
-          <span class="popup__input-error add-input-link-error popup__input-error_active">Ошибка</span>
+          <span class="popup__input-error add-input-link-error"></span>
         </label>
-        <button class="popup__submit popup__submit_disabled" type="submit">Создать</button>
+        <button class="popup__submit" type="submit">Создать</button>
       </form>
     </div>
   </div>

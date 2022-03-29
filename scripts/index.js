@@ -87,9 +87,6 @@ function renderCard(card) {
 }
 
 function formEditSubmitHandler(evt) {
-  // Prevent page reload
-  evt.preventDefault();
-
   // Data rewriting by submit
   name.textContent = editNameInput.value;
   occupation.textContent = editOccupationInput.value;
@@ -99,8 +96,6 @@ function formEditSubmitHandler(evt) {
 };
 
 function formAddSubmitHandler(evt) {
-  evt.preventDefault();
-
   cardData.name = addNameInput.value;
   cardData.link = addLinkInput.value;
 
@@ -112,12 +107,12 @@ initialCards.forEach(function(item, index, array) {
   renderCard(item)
 });
 
-// // Closing popup by click on wrapper feature
-// document.addEventListener('click', (evt) => {
-//   if (evt.target === popup) {
-//     popup.classList.remove('popup_opened');
-//   }
-// });
+// Closing popup by click on wrapper
+document.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup')) {
+    evt.target.classList.remove('popup_opened');
+  }
+});
 
 editButton.addEventListener('click', function() {
   // Clear inputs

@@ -76,3 +76,32 @@ const enableValidation = () => {
 }
 
 enableValidation();
+
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
+
+const enableValidation = ({ formSelector, ...rest }) => { // разложили входящий параметр obj на две составные части: переменную formSelector, и все остальные свойства obj в виде объекта rest
+  setEventListeners(formElement, rest);
+};
+// функция enableValidation равносильна такой записи:
+const enableValidation = (data) => {
+  const params = {
+    oneField: data.oneField,
+    anotherField: data.anotherField,
+    // и так далее копируем все свойства в объект кроме свойства formSelector. А что, если полей 100500?
+  };
+  setEventListeners(formElement, params);
+};
+const setEventListeners = (formElement, { inputSelector, submitButtonSelector, inactiveButtonClass, ...rest }) => { // здесь у функции два параметра: formElement и объект.
+  // из второго параметра вытащили свойства inputSelector, submitButtonSelector, inactiveButtonClass. ими теперь можно пользоваться внутри функции setEventListeners
+  // например, передать в другую функцию...
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+  // а остальные свойства положили в объект rest, и если они там есть, то это будет непустой самостоятельный объект
+};

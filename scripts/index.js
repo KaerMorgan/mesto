@@ -107,12 +107,22 @@ initialCards.forEach(function(item, index, array) {
   renderCard(item)
 });
 
-// Closing popup by click on wrapper
+// Close popup by click on wrapper
 document.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup')) {
     evt.target.classList.remove('popup_opened');
   }
 });
+
+// Close popup by pressing Escape button
+document.addEventListener('keydown', (evt) => {
+  const popups = Array.from(document.querySelectorAll('.popup'))
+  if (evt.key === 'Escape') {
+    popups.forEach((popup) => {
+      closePopup(popup)
+    })
+  }
+})
 
 editButton.addEventListener('click', function() {
   // Clear inputs

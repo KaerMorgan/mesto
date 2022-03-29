@@ -43,10 +43,12 @@
       <button type="button" class="popup__close">
         <img class="popup__close-icon" src="./images/button_close.svg" alt="закрыть форму">
       </button>
-      <form class="popup__form popup__form_type_edit" name="profile-edit">
+      <form class="popup__form popup__form_type_edit" name="profile-edit" novalidate>
         <h3 class="popup__heading">Редактировать профиль</h3>
         <input required class="popup__input" id="edit-input-name" name="name" type="text">
+        <span class="popup__input-error edit-input-name-error"></span>
         <input required class="popup__input" id="edit-input-occupation" name="occupation" type="text">
+        <span class="popup__input-error edit-input-occupation-error"></span>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
@@ -56,10 +58,12 @@
       <button type="button" class="popup__close">
         <img class="popup__close-icon" src="./images/button_close.svg" alt="закрыть форму">
       </button>
-      <form class="popup__form popup__form_type_add" name="profile-add">
+      <form class="popup__form popup__form_type_add" name="profile-add" novalidate>
         <h3 class="popup__heading">Новое место</h3>
         <input required class="popup__input" id="add-input-name" name="name" type="text" placeholder="Название">
+        <span class="popup__input-error add-input-name-error"></span>
         <input required class="popup__input" id="add-input-link" name="link" type="url" placeholder="Ссылка на картинку">
+        <span class="popup__input-error add-input-link-error"></span>
         <button class="popup__submit" type="submit">Создать</button>
       </form>
     </div>

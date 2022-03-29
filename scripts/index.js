@@ -39,6 +39,7 @@ const photoPreviewCaption = photoPreview.querySelector('.photo-view__caption');
 // variable
 const cardData = {}
 
+
 function openPopup(item) {
   item.classList.add('popup_opened');
 }
@@ -56,7 +57,6 @@ function deleteCard(evt) {
 }
 
 function previewCard(item) {
-  // 👍
   photoPreviewImage.src = item.link;
   photoPreviewImage.alt = item.name;
   photoPreviewCaption.textContent = item.name;
@@ -112,7 +112,12 @@ initialCards.forEach(function(item, index, array) {
   renderCard(item)
 });
 
-
+// // Closing popup by click on wrapper feature
+// document.addEventListener('click', (evt) => {
+//   if (evt.target === popup) {
+//     popup.classList.remove('popup_opened');
+//   }
+// });
 
 editButton.addEventListener('click', function() {
   // Clear inputs
@@ -130,7 +135,6 @@ addButton.addEventListener('click', function() {
   openPopup(popupAdd);
 });
 
-
 closeEditButton.addEventListener('click', () => closePopup(popupEdit));
 
 closeAddButton.addEventListener('click', () => closePopup(popupAdd));
@@ -138,4 +142,5 @@ closeAddButton.addEventListener('click', () => closePopup(popupAdd));
 closePreviewButton.addEventListener('click', () => closePopup(photoPreview));
 
 formEdit.addEventListener('submit', formEditSubmitHandler);
+
 formAdd.addEventListener('submit', formAddSubmitHandler);

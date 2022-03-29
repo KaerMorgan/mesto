@@ -131,7 +131,6 @@ addButton.addEventListener('click', function() {
 });
 
 
-// Я никак не мог добавить колбэку аргумент не вызвав его сразу, но так работает, спасибо!
 closeEditButton.addEventListener('click', () => closePopup(popupEdit));
 
 closeAddButton.addEventListener('click', () => closePopup(popupAdd));

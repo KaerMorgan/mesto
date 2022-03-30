@@ -42,10 +42,12 @@ const cardData = {}
 
 function openPopup(item) {
   item.classList.add('popup_opened');
+  document.addEventListener('keydown', escBtnHandler);
 }
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escBtnHandler);
 }
 
 function likeCard(evt) {
@@ -103,6 +105,14 @@ function formAddSubmitHandler(evt) {
   closePopup(popupAdd);
 };
 
+// Close popup by pressing Escape button
+const escBtnHandler = (evt) => {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(activePopup);
+  }
+}
+
 initialCards.forEach(function(item, index, array) {
   renderCard(item)
 });
@@ -113,16 +123,6 @@ document.addEventListener('click', (evt) => {
     evt.target.classList.remove('popup_opened');
   }
 });
-
-// Close popup by pressing Escape button
-document.addEventListener('keydown', (evt) => {
-  const popups = Array.from(document.querySelectorAll('.popup'))
-  if (evt.key === 'Escape') {
-    popups.forEach((popup) => {
-      closePopup(popup)
-    })
-  }
-})
 
 editButton.addEventListener('click', function() {
   // Clear inputs

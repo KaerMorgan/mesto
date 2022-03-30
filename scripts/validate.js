@@ -21,7 +21,7 @@ const isValid = (formElement, inputElement, { inputErrorClass, errorClass }) => 
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, inputErrorClass, errorClass);
   }
 }
 
@@ -38,8 +38,11 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
     // Disable if one of inputs is invalid
     buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.setAttribute("disabled", "true");
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute("disabled");
+
   }
 }
 
@@ -60,6 +63,23 @@ const setEventListeners = (formElement, { inputSelector, submitButtonSelector, i
       toggleButtonState(inputList, buttonElement, inactiveButtonClass)
     })
   });
+
+  editButton.addEventListener('click', function() {
+    // Clear inputs
+    editNameInput.value = name.textContent
+    editOccupationInput.value = occupation.textContent
+
+    toggleButtonState(inputList, buttonElement, inactiveButtonClass)
+    openPopup(popupEdit);
+  });
+
+  addButton.addEventListener('click', function() {
+    // Clear inputs
+    formAdd.reset();
+
+    toggleButtonState(inputList, buttonElement, inactiveButtonClass)
+    openPopup(popupAdd);
+  });
 }
 
 // Start chain validation function
@@ -74,7 +94,8 @@ const enableValidation = ({ formSelector, ...rest }) => {
     setEventListeners(formElement, rest);
   })
 }
-z
+
+// Я случайно нажал на букву 'z' перед коммитом в мэйн и вся валидация сломалась.👍 Как много всего перестало работать в стране из-за буквы "z" 🤔
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',

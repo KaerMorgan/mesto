@@ -33,7 +33,7 @@ export const photoPreviewCaption = photoPreview.querySelector('.photo-view__capt
 
 // variable
 const cardData = {}
-
+const cardContainer = document.querySelector('.elements__grid');
 
 export function openPopup(item) {
   item.classList.add('popup_opened');
@@ -45,7 +45,7 @@ function closePopup(item) {
   document.removeEventListener('keydown', handleEscButton);
 }
 
-function handleEditFormSubmit(evt) {
+function handleEditFormSubmit() {
   // Data rewriting by submit
   name.textContent = editNameInput.value;
   occupation.textContent = editOccupationInput.value;
@@ -54,15 +54,12 @@ function handleEditFormSubmit(evt) {
   closePopup(popupEdit)
 };
 
-function handleAddFormSubmit(evt) {
+function handleAddFormSubmit() {
 
   cardData.name = addNameInput.value;
   cardData.link = addLinkInput.value;
 
-  const card = new Card(cardData, '#card');
-  const cardElement = card.renderCard();
-
-  document.querySelector('.elements__grid').prepend(cardElement);
+  addCard(cardData)
   closePopup(popupAdd);
 };
 
@@ -72,6 +69,26 @@ const handleEscButton = (evt) => {
     const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   }
+}
+
+
+function handleCardClick(name, link) {
+  photoPreviewImage.src = link;
+  photoPreviewImage.alt = name;
+  photoPreviewCaption.textContent = name;
+
+  openPopup(photoPreview);
+}
+
+function createCard(cardData) {
+  const card = new Card(cardData, '#card', handleCardClick);
+  const cardElement = card.renderCard();
+
+  return cardElement
+}
+
+function addCard(card) {
+  cardContainer.prepend(createCard(card));
 }
 
 // Close popup by click on wrapper
@@ -90,11 +107,16 @@ formEdit.addEventListener('submit', handleEditFormSubmit);
 
 formAdd.addEventListener('submit', handleAddFormSubmit);
 
-// Initial card array render
-initialCards.forEach((item) => {
-  const card = new Card(item, '#card');
-  const cardElement = card.renderCard();
+// // Initial card array render
+// initialCards.forEach((item) => {
+//   const card = new Card(item, '#card', handleCardClick);
+//   const cardElement = card.renderCard();
 
-  // Добавляем в DOM
-  document.querySelector('.elements__grid').append(cardElement);
-});
+//   // Добавляем в DOM
+//   document.querySelector('.elements__grid').append(cardElement);
+// });
+
+
+initialCards.forEach((item) => {
+  addCard(item);
+})

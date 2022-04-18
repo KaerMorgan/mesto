@@ -1,10 +1,11 @@
 import { photoPreviewImage, photoPreviewCaption, openPopup, photoPreview } from './index.js'
 
 export default class Card {
-  constructor(item, templateSelector) {
+  constructor(item, templateSelector, handleCardClick) {
     this._name = item.name
     this._link = item.link
     this._templateSelector = templateSelector
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -14,37 +15,36 @@ export default class Card {
 
   renderCard() {
     this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector('.element__photo');
+    this._cardCaption = this._element.querySelector('.element__caption');
+    this._cardLike = this._element.querySelector('.element__like');
+    this._cardDelete = this._element.querySelector('.element__delete');
 
-    this._element.querySelector('.element__photo').src = this._link;
-    this._element.querySelector('.element__photo').alt = this._name;
-    this._element.querySelector('.element__caption').textContent = this._name;
+
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardCaption.textContent = this._name;
     this._setEventListeners();
 
     return this._element
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__photo').addEventListener('click', () => {
-      this._previewCard();
-    })
 
-    this._element.querySelector('.element__like').addEventListener('click', () => {
+    this._cardLike.addEventListener('click', () => {
       this._handleLikeCard();
     })
 
-    this._element.querySelector('.element__delete').addEventListener('click', () => {
+    this._cardDelete.addEventListener('click', () => {
       this._handleDeleteCard();
     })
 
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link)
+    });
+
   }
 
-  _previewCard() {
-    photoPreviewImage.src = this._link;
-    photoPreviewImage.alt = this._name;
-    photoPreviewCaption.textContent = this._name;
-
-    openPopup(photoPreview);
-  }
 
   _handleLikeCard() {
     this._element.querySelector('.element__like').classList.toggle('element__like_pressed');

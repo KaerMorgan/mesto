@@ -2,26 +2,26 @@ import Card from './Card.js';
 import { initialCards } from './cards.js';
 
 // Popup wrappers
-const popupEdit = document.querySelector('.popup_type_edit');
-const popupAdd = document.querySelector('.popup_type_add');
+export const popupEdit = document.querySelector('.popup_type_edit');
+export const popupAdd = document.querySelector('.popup_type_add');
 export const photoPreview = document.querySelector('.photo-view')
 const popups = document.querySelectorAll('.popup')
 
 // Popup initializers
-const addButton = document.querySelector('.profile__add-button')
-const editButton = document.querySelector('.profile__edit-button');
+export const addButton = document.querySelector('.profile__add-button')
+export const editButton = document.querySelector('.profile__edit-button');
 
 // Profile info
-const name = document.querySelector('.profile__name');
-const occupation = document.querySelector('.profile__occupation');
+export const name = document.querySelector('.profile__name');
+export const occupation = document.querySelector('.profile__occupation');
 
 // Popup forms (to apply submit behavior)
-const formEdit = document.querySelector('.popup__form_type_edit')
-const formAdd = document.querySelector('.popup__form_type_add')
+export const formEdit = document.querySelector('.popup__form_type_edit')
+export const formAdd = document.querySelector('.popup__form_type_add')
 
 // Popup edit inputs
-const editNameInput = formEdit.querySelector('#edit-input-name');
-const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
+export const editNameInput = formEdit.querySelector('#edit-input-name');
+export const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
 
 // Popup add inputs
 const addNameInput = formAdd.querySelector('#add-input-name');
@@ -55,10 +55,14 @@ function handleEditFormSubmit(evt) {
 };
 
 function handleAddFormSubmit(evt) {
+
   cardData.name = addNameInput.value;
   cardData.link = addLinkInput.value;
 
-  // renderCard(cardData);
+  const card = new Card(cardData, '#card');
+  const cardElement = card.renderCard();
+
+  document.querySelector('.elements__grid').prepend(cardElement);
   closePopup(popupAdd);
 };
 

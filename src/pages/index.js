@@ -1,5 +1,5 @@
-import Card from './Card.js';
-import { initialCards } from './cards.js';
+import Card from '../scripts/components/Card.js';
+import { initialCards } from '../scripts/cards.js';
 
 // Popup wrappers
 export const popupEdit = document.querySelector('.popup_type_edit');

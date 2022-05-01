@@ -1,4 +1,4 @@
-import { editButton, addButton, formEdit, formAdd, editNameInput, editOccupationInput, name, occupation, openPopup, popupAdd, popupEdit } from "./index.js"
+import { editButton, addButton, formEdit, formAdd, editNameInput, editOccupationInput, name, occupation, openPopup, popupAdd, popupEdit } from "../../pages/index.js"
 
 export default class FormValidator {
   constructor(data, form, formButtonSelector) {

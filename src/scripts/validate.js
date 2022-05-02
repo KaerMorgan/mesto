@@ -1,5 +1,4 @@
 import FormValidator from "./components/FormValidator.js";
-import { openPopup, photoPreview, photoPreviewCaption, photoPreviewImage, editButton, addButton, editNameInput, editOccupationInput, name, occupation, popupEdit, popupAdd, formEdit, formAdd } from "../pages/index.js";
 
 
 const formSelectors = {

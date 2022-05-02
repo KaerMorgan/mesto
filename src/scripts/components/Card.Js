@@ -1,9 +1,7 @@
-import { photoPreviewImage, photoPreviewCaption, openPopup, photoPreview } from '../../pages/index.js'
-
 export default class Card {
-  constructor(item, templateSelector, handleCardClick) {
-    this._name = item.name
-    this._link = item.link
+  constructor(cardData, templateSelector, handleCardClick) {
+    this._name = cardData.name
+    this._link = cardData.link
     this._templateSelector = templateSelector
     this._handleCardClick = handleCardClick
   }
@@ -16,7 +14,7 @@ export default class Card {
     return cardTemplate
   }
 
-  renderCard() {
+  generateCard() {
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector('.element__photo');
     this._cardCaption = this._element.querySelector('.element__caption');

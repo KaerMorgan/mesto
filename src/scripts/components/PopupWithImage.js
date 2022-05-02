@@ -1,10 +1,10 @@
-import Popup from "./Popup.js";
+// import Popup from "./Popup.js";
 
-export default class PopupWithImage extends Popup {
+// export default class PopupWithImage extends Popup {
 
-  // constructor(){}
+//   // constructor(){}
 
-  open() {
-    // super.open()
-  }
-}
+//   open() {
+//     // super.open()
+//   }
+// }

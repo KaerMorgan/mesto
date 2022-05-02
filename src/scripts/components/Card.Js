@@ -1,4 +1,4 @@
-import { photoPreviewImage, photoPreviewCaption, openPopup, photoPreview } from './index.js'
+import { photoPreviewImage, photoPreviewCaption, openPopup, photoPreview } from '../../pages/index.js'
 
 export default class Card {
   constructor(item, templateSelector, handleCardClick) {

@@ -1,5 +1,6 @@
 import Card from '../scripts/components/Card.js';
 import { initialCards } from '../scripts/cards.js';
+import Section from '../scripts/components/Section.js'
 
 // Popup wrappers
 export const popupEdit = document.querySelector('.popup_type_edit');
@@ -33,7 +34,6 @@ export const photoPreviewCaption = photoPreview.querySelector('.photo-view__capt
 
 // variable
 const cardData = {}
-const cardContainer = document.querySelector('.elements__grid');
 
 export function openPopup(item) {
   item.classList.add('popup_opened');
@@ -107,16 +107,14 @@ formEdit.addEventListener('submit', handleEditFormSubmit);
 
 formAdd.addEventListener('submit', handleAddFormSubmit);
 
-// // Initial card array render
-// initialCards.forEach((item) => {
-//   const card = new Card(item, '#card', handleCardClick);
-//   const cardElement = card.renderCard();
+// Initial cards load
+const initialCardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '#card', handleCardClick)
+    const cardElement = card.renderCard();
+    initialCardList.addItem(cardElement);
+  }
+}, '.elements__grid')
 
-//   // Добавляем в DOM
-//   document.querySelector('.elements__grid').append(cardElement);
-// });
-
-
-initialCards.forEach((item) => {
-  addCard(item);
-})
+initialCardList.renderItems();

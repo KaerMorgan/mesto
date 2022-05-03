@@ -3,10 +3,11 @@ import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js'
 import Popup from '../scripts/components/Popup.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
 
 // Popup wrappers
-export const popupEdit = document.querySelector('.popup_type_edit');
-export const popupAdd = document.querySelector('.popup_type_add');
+// export const popupEdit = document.querySelector('.popup_type_edit');
+// export const popupAdd = document.querySelector('.popup_type_add');
 // export const photoPreview = document.querySelector('.photo-view')
 
 
@@ -27,25 +28,11 @@ export const editNameInput = formEdit.querySelector('#edit-input-name');
 export const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
 
 // Popup add inputs
-const addNameInput = formAdd.querySelector('#add-input-name');
-const addLinkInput = formAdd.querySelector('#add-input-link');
-
-// Photo popup variables
-// export const photoPreviewImage = photoPreview.querySelector('.photo-view__image');
-// export const photoPreviewCaption = photoPreview.querySelector('.photo-view__caption');
+// const addNameInput = formAdd.querySelector('#add-input-name');
+// const addLinkInput = formAdd.querySelector('#add-input-link');
 
 // variable
 // const cardData = {}
-
-// export function openPopup(item) {
-//   item.classList.add('popup_opened');
-//   document.addEventListener('keydown', handleEscButton);
-// }
-
-// function closePopup(item) {
-//   item.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', handleEscButton);
-// }
 
 // function handleEditFormSubmit() {
 //   // Data rewriting by submit
@@ -73,9 +60,6 @@ const addLinkInput = formAdd.querySelector('#add-input-link');
 //   }
 // }
 
-
-
-
 // function createCard(cardData) {
 //   const card = new Card(cardData, '#card', handleCardClick);
 //   const cardElement = card.renderCard();
@@ -93,22 +77,12 @@ const addLinkInput = formAdd.querySelector('#add-input-link');
 // formAdd.addEventListener('submit', handleAddFormSubmit);
 
 // Initial cards load
-
-
-// function handleCardClick(name, link) {
-//   photoPreviewImage.src = link;
-//   photoPreviewImage.alt = name;
-//   photoPreviewCaption.textContent = name;
-
-//   openPopup(photoPreview);
-// }
-
 export const photoPreview = new PopupWithImage('.photo-view')
 
 const initialCardList = new Section({
   data: initialCards,
   renderer: (cardData) => {
-    const card = new Card(cardData, '#card', handleCardClick)
+    const card = new Card(cardData, '#card', handleCardClick);
     const cardElement = card.generateCard();
     initialCardList.addItem(cardElement);
   }
@@ -117,5 +91,20 @@ const initialCardList = new Section({
 initialCardList.renderItems();
 
 function handleCardClick(name, link) {
-  photoPreview.open(name, link)
+  photoPreview.open(name, link);
 }
+
+function submitCallback(cardData) {
+  console.log(2)
+
+  const card = new Card(cardData, '#card', handleCardClick);
+  const cardElement = card.generateCard();
+  initialCardList.addItem(cardElement);
+  this.close()
+}
+
+export const popupEdit = new PopupWithForm('.popup_type_edit', submitCallback);
+// editButton.addEventListener('click', popupEdit.open)
+
+export const popupAdd = new PopupWithForm('.popup_type_add', submitCallback);
+// addButton.addEventListener('click', popupAdd.open)

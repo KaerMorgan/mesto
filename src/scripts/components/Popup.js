@@ -3,6 +3,7 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
     this._closeButton = this._popup.querySelector('.popup__close')
     this.close = this.close.bind(this); // я потерял контекст 10000 раз пока не вспомнил про эту штуку
+    this.open = this.open.bind(this);
     this._handleEscClose = this._handleEscClose.bind(this);
     this._handleWrapperClose = this._handleWrapperClose.bind(this);
   }
@@ -39,7 +40,6 @@ export default class Popup {
     document.removeEventListener('keydown', this._handleEscClose);
     this._popup.removeEventListener('mousedown', this._handleWrapperClose)
     this._closeButton.removeEventListener('click', this.close);
-
   }
 
 }

@@ -4,6 +4,7 @@ import Section from '../scripts/components/Section.js'
 import Popup from '../scripts/components/Popup.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
 // Popup wrappers
 // export const popupEdit = document.querySelector('.popup_type_edit');
@@ -24,8 +25,8 @@ export const formEdit = document.querySelector('.popup__form_type_edit')
 export const formAdd = document.querySelector('.popup__form_type_add')
 
 // Popup edit inputs
-export const editNameInput = formEdit.querySelector('#edit-input-name');
-export const editOccupationInput = formEdit.querySelector('#edit-input-occupation');
+export const editNameInput = formEdit.querySelector('#profile__name-input');
+export const editOccupationInput = formEdit.querySelector('#profile__occupation-input');
 
 // Popup add inputs
 // const addNameInput = formAdd.querySelector('#add-input-name');
@@ -78,6 +79,11 @@ export const editOccupationInput = formEdit.querySelector('#edit-input-occupatio
 
 // Initial cards load
 export const photoPreview = new PopupWithImage('.photo-view')
+export const profile = new UserInfo({ nameSelector: '#profile__name', occupationSelector: '#profile__occupation' })
+
+function handleCardClick(name, link) {
+  photoPreview.open(name, link);
+}
 
 const initialCardList = new Section({
   data: initialCards,
@@ -90,21 +96,23 @@ const initialCardList = new Section({
 
 initialCardList.renderItems();
 
-function handleCardClick(name, link) {
-  photoPreview.open(name, link);
-}
+export const popupEdit = new PopupWithForm({
+  popupSelector: '.popup_type_edit',
+  submitCallback: () => {
+    const infoData = profile.getUserInfo()
+    console.log(infoData)
+    profile.setUserInfo(infoData);
+    popupEdit.close()
+  }
+});
 
-function submitCallback(cardData) {
-  console.log(2)
-
-  const card = new Card(cardData, '#card', handleCardClick);
-  const cardElement = card.generateCard();
-  initialCardList.addItem(cardElement);
-  this.close()
-}
-
-export const popupEdit = new PopupWithForm('.popup_type_edit', submitCallback);
-// editButton.addEventListener('click', popupEdit.open)
-
-export const popupAdd = new PopupWithForm('.popup_type_add', submitCallback);
-// addButton.addEventListener('click', popupAdd.open)
+export const popupAdd = new PopupWithForm({
+  popupSelector: '.popup_type_add',
+  submitCallback: () => {
+    popupAdd._getInputValues();
+    const card = new Card(popupAdd._inputValues, '#card', handleCardClick);
+    const cardElement = card.generateCard();
+    initialCardList.addItem(cardElement);
+    popupAdd.close()
+  }
+});

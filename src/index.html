@@ -20,8 +20,8 @@
     <section class="profile">
       <img src="./images/profile__avatar.png" alt="аватар" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__occupation">Исследователь океана</p>
+        <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
+        <p class="profile__occupation" id="profile__occupation">Исследователь океана</p>
         <button type="button" class="profile__edit-button">
           <img class="profile__edit-image" src="./images/button_edit.svg" alt="Редактировать">
         </button>
@@ -46,12 +46,12 @@
       <form class="popup__form popup__form_type_edit" name="profile-edit" novalidate>
         <h3 class="popup__heading">Редактировать профиль</h3>
         <label class="popup__field">
-          <input required class="popup__input" id="edit-input-name" name="name" type="text" minlength="2" maxlength="40">
-          <span class="popup__input-error edit-input-name-error"></span>
+          <input required class="popup__input" id="profile__name-input" name="name" type="text" minlength="2" maxlength="40">
+          <span class="popup__input-error profile__name-input-error"></span>
         </label>
         <label class="popup__field">
-          <input required class="popup__input" id="edit-input-occupation" name="occupation" type="text" minlength="2" maxlength="200">
-          <span class="popup__input-error edit-input-occupation-error"></span>
+          <input required class="popup__input" id="profile__occupation-input" name="occupation" type="text" minlength="2" maxlength="200">
+          <span class="popup__input-error profile__occupation-input-error"></span>
         </label>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>

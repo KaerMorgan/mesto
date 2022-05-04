@@ -1,4 +1,4 @@
-import { editButton, addButton, editNameInput, editOccupationInput, name, occupation, popupEdit, popupAdd } from "../../pages/index.js"
+import { editNameInput, editOccupationInput, name, occupation, popupEdit, popupAdd } from "../../pages/index.js"
 
 
 export default class FormValidator {
@@ -78,28 +78,13 @@ export default class FormValidator {
         editOccupationInput.value = occupation.textContent
 
         this._toggleButtonState(inputList, buttonElement)
-          // openPopup(popupEdit);
+        popupEdit.open();
+
       } else {
-        // Clear inputs
-        // formAdd.reset();
-
         this._toggleButtonState(inputList, buttonElement)
-          // openPopup(popupAdd);
+        popupAdd.open();
       }
-
     })
-
-    editButton.addEventListener('click', () => {
-
-      this._toggleButtonState(inputList, buttonElement)
-      popupEdit.open();
-    });
-
-    addButton.addEventListener('click', () => {
-
-      this._toggleButtonState(inputList, buttonElement)
-      popupAdd.open();
-    });
   }
 
   enableValidation() {

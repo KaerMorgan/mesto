@@ -46,11 +46,11 @@
         <h3 class="popup__heading">Редактировать профиль</h3>
         <label class="popup__field">
           <input required class="popup__input" id="profile__name-input" name="name" type="text" minlength="2" maxlength="40">
-          <span class="popup__input-error profile__name-input-error"></span>
+          <span class="popup__input-error" id="profile__name-input-error"></span>
         </label>
         <label class="popup__field">
           <input required class="popup__input" id="profile__occupation-input" name="occupation" type="text" minlength="2" maxlength="200">
-          <span class="popup__input-error profile__occupation-input-error"></span>
+          <span class="popup__input-error" id="profile__occupation-input-error"></span>
         </label>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
@@ -65,11 +65,11 @@
         <h3 class="popup__heading">Новое место</h3>
         <label class="popup__field">
           <input required class="popup__input" id="add-input-name" name="name" type="text" placeholder="Название"  minlength="2" maxlength="40">
-          <span class="popup__input-error add-input-name-error"></span>
+          <span class="popup__input-error" id="add-input-name-error"></span>
         </label>
         <label class="popup__field">
           <input required class="popup__input" id="add-input-link" name="link" type="url" placeholder="Ссылка на картинку">
-          <span class="popup__input-error add-input-link-error"></span>
+          <span class="popup__input-error" id="add-input-link-error"></span>
         </label>
         <button class="popup__submit" type="submit">Создать</button>
       </form>

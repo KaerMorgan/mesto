@@ -1,3 +1,4 @@
+import '../pages/index.css';
 import { initialCards } from '../scripts/cards.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js'

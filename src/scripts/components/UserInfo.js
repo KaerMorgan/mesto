@@ -3,14 +3,10 @@ export default class UserInfo {
     this._name = document.querySelector(nameSelector)
     this._nameInput = document.querySelector(`${nameSelector}-input`)
     this._occupation = document.querySelector(occupationSelector)
-    this._occupationInput = document.querySelector(`${occupationSelector}`)
+    this._occupationInput = document.querySelector(`${occupationSelector}-input`)
   }
 
   getUserInfo() {
-    console.log(this._name)
-    console.log(this._nameInput)
-    console.log(this._occupation)
-    console.log(this._occupationInput)
     return {
       name: this._nameInput.value,
       occupation: this._occupationInput.value
@@ -18,7 +14,9 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, occupation }) {
+    this._name.textContent = name;
     this._nameInput.textContent = name;
+    this._occupation.textContent = occupation;
     this._occupationInput.textContent = occupation;
   }
 }

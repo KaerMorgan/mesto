@@ -100,7 +100,6 @@ export const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   submitCallback: () => {
     const infoData = profile.getUserInfo()
-    console.log(infoData)
     profile.setUserInfo(infoData);
     popupEdit.close()
   }

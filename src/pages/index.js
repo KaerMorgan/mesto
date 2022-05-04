@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import '../pages/index.css'
 import { initialCards } from '../scripts/cards.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js'
@@ -6,12 +6,7 @@ import Popup from '../scripts/components/Popup.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-
-// Popup wrappers
-// export const popupEdit = document.querySelector('.popup_type_edit');
-// export const popupAdd = document.querySelector('.popup_type_add');
-// export const photoPreview = document.querySelector('.photo-view')
-
+import FormValidator from "../scripts/components/FormValidator.js";
 
 // Popup initializers
 export const addButton = document.querySelector('.profile__add-button')
@@ -28,55 +23,6 @@ export const formAdd = document.querySelector('.popup__form_type_add')
 // Popup edit inputs
 export const editNameInput = formEdit.querySelector('#profile__name-input');
 export const editOccupationInput = formEdit.querySelector('#profile__occupation-input');
-
-// Popup add inputs
-// const addNameInput = formAdd.querySelector('#add-input-name');
-// const addLinkInput = formAdd.querySelector('#add-input-link');
-
-// variable
-// const cardData = {}
-
-// function handleEditFormSubmit() {
-//   // Data rewriting by submit
-//   name.textContent = editNameInput.value;
-//   occupation.textContent = editOccupationInput.value;
-
-//   //Close popup by submit
-//   closePopup(popupEdit)
-// };
-
-// function handleAddFormSubmit() {
-
-//   cardData.name = addNameInput.value;
-//   cardData.link = addLinkInput.value;
-
-//   addCard(cardData)
-//   closePopup(popupAdd);
-// };
-
-// Close popup by pressing Escape button
-// const handleEscButton = (evt) => {
-//   if (evt.key === 'Escape') {
-//     const activePopup = document.querySelector('.popup_opened');
-//     closePopup(activePopup);
-//   }
-// }
-
-// function createCard(cardData) {
-//   const card = new Card(cardData, '#card', handleCardClick);
-//   const cardElement = card.renderCard();
-
-//   return cardElement
-// }
-
-// function addCard(card) {
-//   cardContainer.prepend(createCard(card));
-// }
-
-
-// formEdit.addEventListener('submit', handleEditFormSubmit);
-
-// formAdd.addEventListener('submit', handleAddFormSubmit);
 
 // Initial cards load
 export const photoPreview = new PopupWithImage('.photo-view')
@@ -116,3 +62,20 @@ export const popupAdd = new PopupWithForm({
     popupAdd.close()
   }
 });
+
+
+
+const formSelectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
+const FormAddValidator = new FormValidator(formSelectors, '.popup__form_type_add', '.profile__add-button');
+FormAddValidator.enableValidation()
+
+const FormEditValidator = new FormValidator(formSelectors, '.popup__form_type_edit', '.profile__edit-button')
+FormEditValidator.enableValidation()

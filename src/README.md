@@ -9,3 +9,4 @@
 В планах функция редактирования изображения профиля, аутентификация, поддержка счётчика лайков, написание серверной логики и оформление комментариев по JSDoc.
 
 Ссылка на GitHub Pages: https://kaermorgan.github.io/mesto/index.html
+<span style="color:blue">some *blue* text</span>.

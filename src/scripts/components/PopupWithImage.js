@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
     this._caption = this._popup.querySelector('.photo-view__caption')
   }
 
-  open(name, link) {
+  open({ name, link }) {
     this._caption.textContent = name
     this._image.src = link
     super.open()

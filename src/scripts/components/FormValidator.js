@@ -1,4 +1,5 @@
-import { editNameInput, editOccupationInput, name, occupation, popupEdit, popupAdd } from "../../pages/index.js"
+import { editNameInput, editOccupationInput, name, occupation } from "../utils/constants.js"
+import { popupEdit, popupAdd } from "../../pages/index.js"
 
 
 export default class FormValidator {

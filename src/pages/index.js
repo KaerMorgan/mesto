@@ -1,4 +1,4 @@
-// import '../pages/index.css'
+import '../pages/index.css'
 import { initialCards, formSelectors } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js'

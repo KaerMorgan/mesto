@@ -14,16 +14,6 @@ photoPreview.setEventListeners()
 
 export const profile = new UserInfo({ nameSelector: '#profile__name', occupationSelector: '#profile__occupation' })
 
-export const popupEdit = new PopupWithForm({
-  popupSelector: '.popup_type_edit',
-  submitCallback: () => {
-    const infoData = profile.getUserInfo()
-    profile.setUserInfo(infoData);
-    popupEdit.close()
-  }
-});
-popupEdit.setEventListeners()
-
 function renderCard(cardData) {
   const card = new Card({ name: cardData.name, link: cardData.link }, "#card", () => {
     photoPreview.open({ name: cardData.name, link: cardData.link });
@@ -31,11 +21,19 @@ function renderCard(cardData) {
   return card.generateCard();
 }
 
+export const popupEdit = new PopupWithForm({
+  popupSelector: '.popup_type_edit',
+  submitCallback: (userData) => {
+    profile.setUserInfo(userData);
+    popupEdit.close()
+  }
+});
+popupEdit.setEventListeners()
+
 export const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
-  submitCallback: () => {
-    popupAdd._getInputValues();
-    initialCardList.addItem(renderCard(popupAdd._inputValues));
+  submitCallback: (cardData) => {
+    initialCardList.addItem(renderCard(cardData));
     popupAdd.close()
   }
 });

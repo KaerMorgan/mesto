@@ -77,14 +77,16 @@ export default class FormValidator {
         // Clear inputs
         editNameInput.value = name.textContent
         editOccupationInput.value = occupation.textContent
-
         this._toggleButtonState(inputList, buttonElement)
         popupEdit.open();
-
-      } else {
+      } else if (this._showFormButton.classList.contains('profile__add-button')) {
         this._toggleButtonState(inputList, buttonElement)
         popupAdd.open();
       }
+      // else {
+      //   this._toggleButtonState(inputList, buttonElement)
+      //   popupAvatar.open();
+      // }
     })
   }
 

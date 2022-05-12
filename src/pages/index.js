@@ -1,9 +1,10 @@
-import '../pages/index.css'
+// import '../pages/index.css'
 import { initialCards, formSelectors } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js'
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import FormValidator from "../scripts/components/FormValidator.js";
 
@@ -37,6 +38,14 @@ export const popupAdd = new PopupWithForm({
     popupAdd.close()
   }
 });
+
+// export const popupAvatar = new PopupWithConfirmation({
+//   popupSelector: '.popup_type_avatar',
+//   submitCallback: () => {
+//     popupAvatar.close()
+//   }
+// })
+
 popupAdd.setEventListeners()
 
 const FormAddValidator = new FormValidator(formSelectors, '.popup__form_type_add', '.profile__add-button');
@@ -44,6 +53,9 @@ FormAddValidator.enableValidation()
 
 const FormEditValidator = new FormValidator(formSelectors, '.popup__form_type_edit', '.profile__edit-button')
 FormEditValidator.enableValidation()
+
+// const FormAvatarValidator = new FormValidator(formSelectors, '.popup__form_type_avatar', '.profile__avatar')
+// FormAvatarValidator.enableValidation()
 
 const initialCardList = new Section({
   data: initialCards,

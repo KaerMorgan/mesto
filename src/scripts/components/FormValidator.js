@@ -1,5 +1,5 @@
 import { editNameInput, editOccupationInput, name, occupation } from "../utils/constants.js"
-import { popupEdit, popupAdd } from "../../pages/index.js"
+import { popupEdit, popupAdd, popupAvatar } from "../../pages/index.js"
 
 
 export default class FormValidator {
@@ -82,11 +82,10 @@ export default class FormValidator {
       } else if (this._showFormButton.classList.contains('profile__add-button')) {
         this._toggleButtonState(inputList, buttonElement)
         popupAdd.open();
+      } else {
+        this._toggleButtonState(inputList, buttonElement)
+        popupAvatar.open();
       }
-      // else {
-      //   this._toggleButtonState(inputList, buttonElement)
-      //   popupAvatar.open();
-      // }
     })
   }
 

@@ -1,9 +1,10 @@
 export default class UserInfo {
-  constructor({ nameSelector, occupationSelector }) {
+  constructor({ nameSelector, occupationSelector, avatarSelector }) {
     this._name = document.querySelector(nameSelector)
     this._nameInput = document.querySelector(`${nameSelector}-input`)
     this._occupation = document.querySelector(occupationSelector)
     this._occupationInput = document.querySelector(`${occupationSelector}-input`)
+    this._avatar = document.querySelector(avatarSelector)
   }
 
   getUserInfo() {
@@ -13,10 +14,11 @@ export default class UserInfo {
     }
   }
 
-  setUserInfo({ name, occupation }) {
+  setUserInfo({ name, occupation, link }) {
     this._name.textContent = name;
     this._nameInput.textContent = name;
     this._occupation.textContent = occupation;
     this._occupationInput.textContent = occupation;
+    this._avatar.src = link
   }
 }

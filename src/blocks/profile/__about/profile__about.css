@@ -1,4 +1,4 @@
-.profile__occupation {
+.profile__about {
   padding: 0;
   margin: 0;
   grid-row-start: 2;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 950px) {
-  .profile__occupation {
+  .profile__about {
     font-size: 14px;
     line-height: 17px;
     text-align: center;

@@ -24,52 +24,85 @@ export default class Api {
   // POST
   _addCard(cardData) {
     return fetch(`${this._url}cards`, {
-        method: 'GET',
-        headers: this._headers,
+        method: 'POST',
+        headers: {
+          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(cardData)
       }).then(this._checkErorr)
       .catch(err => console.log(err))
   }
 
-  // DELETE
-  _deleteCard() {
-
+  // DELETE cards/cardId
+  _deleteCard(id) {
+    return fetch(`${this._url}cards/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+        },
+      }).then(this._checkErorr)
+      .catch(err => console.log(err))
   }
 
   // GET
-  // _getUserInfo() {
-  //   fetch(`${this._url}users/me`, {
-  //       method: 'GET',
-  //       headers: this._headers
-  //     })
-  //     .then(this._checkErorr)
-  //     .then(result => console.log(result))
-  //     .catch(err => console.log(err))
-  // }
+  _getUserInfo() {
+    return fetch(`${this._url}users/me`, {
+        method: 'GET',
+        headers: this._headers
+      })
+      .then(this._checkErorr)
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
+  }
 
   // PATCH
-  // _changeUserInfo() {
-  //   fetch(`${this._url}users/me`, {
-  //       method: 'GET',
-  //       headers: this._headers
-  //     })
-  //     .then(this._checkErorr)
-  //     .then(result => console.log(result))
-  //     .catch(err => console.log(err))
-  // }
+  _changeUserInfo(userData) {
+    return fetch(`${this._url}users/me`, {
+        method: 'GET',
+        headers: {
+          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      })
+      .then(this._checkErorr)
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
+  }
 
   // PATCH
-  _changeAvatar() {
-
+  _changeAvatar(avatar) {
+    return fetch(`${this._url}users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(avatar)
+      }).then(this._checkErorr)
+      .catch(err => console.log(err))
   }
 
   // PUT
-  _likeCard() {
-
+  _likeCard(id) {
+    return fetch(`${this._url}cards/${id}/likes`, {
+        method: 'PUT',
+        headers: {
+          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+        },
+      }).then(this._checkErorr)
+      .catch(err => console.log(err))
   }
 
   // DELETE
   _removeLike() {
-
+    return fetch(`${this._url}cards/${id}/likes`, {
+        method: 'DELETE',
+        headers: {
+          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+        },
+      }).then(this._checkErorr)
+      .catch(err => console.log(err))
   }
 }

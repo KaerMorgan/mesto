@@ -1,4 +1,4 @@
-import { editNameInput, editOccupationInput, name, occupation } from "../utils/constants.js"
+import { editNameInput, editOccupationInput, name, about } from "../utils/constants.js"
 import { popupEdit, popupAdd, popupAvatar } from "../../pages/index.js"
 
 
@@ -76,7 +76,7 @@ export default class FormValidator {
       if (this._showFormButton.classList.contains('profile__edit-button')) {
         // Clear inputs
         editNameInput.value = name.textContent
-        editOccupationInput.value = occupation.textContent
+        editOccupationInput.value = about.textContent
         this._toggleButtonState(inputList, buttonElement)
         popupEdit.open();
       } else if (this._showFormButton.classList.contains('profile__add-button')) {

@@ -4,7 +4,7 @@ export const editButton = document.querySelector('.profile__edit-button');
 
 // Profile info
 export const name = document.querySelector('.profile__name');
-export const occupation = document.querySelector('.profile__occupation');
+export const about = document.querySelector('.profile__about');
 
 // Popup forms (to apply submit behavior)
 export const formEdit = document.querySelector('.popup__form_type_edit')
@@ -12,7 +12,7 @@ export const formAdd = document.querySelector('.popup__form_type_add')
 
 // Popup edit inputs
 export const editNameInput = formEdit.querySelector('#profile__name-input');
-export const editOccupationInput = formEdit.querySelector('#profile__occupation-input');
+export const editOccupationInput = formEdit.querySelector('#profile__about-input');
 
 // Selectors for form validation
 export const formSelectors = {

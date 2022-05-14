@@ -18,13 +18,15 @@ export const api = new Api({
     authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3'
   }
 })
+api._getUserInfo();
 
 export const photoPreview = new PopupWithImage('.photo-view');
 photoPreview.setEventListeners()
 
-export const profile = new UserInfo({ nameSelector: '#profile__name', occupationSelector: '#profile__occupation', avatarSelector: ".profile__avatar" })
+export const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
 
 function renderCard(cardData) {
+  // api._addCard().then
   const card = new Card({ name: cardData.name, link: cardData.link, id: cardData.id }, "#card", () => {
     photoPreview.open({ name: cardData.name, link: cardData.link });
   });
@@ -48,6 +50,7 @@ export const popupAdd = new PopupWithForm({
     popupAdd.close()
   }
 });
+popupAdd.setEventListeners();
 
 export const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
@@ -56,6 +59,7 @@ export const popupAvatar = new PopupWithForm({
     popupAvatar.close()
   }
 });
+popupAvatar.setEventListeners();
 
 export const popupDelete = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
@@ -63,8 +67,8 @@ export const popupDelete = new PopupWithConfirmation({
     popupDelete.close()
   }
 });
+popupDelete.setEventListeners();
 
-popupAdd.setEventListeners();
 
 const FormAddValidator = new FormValidator(formSelectors, '.popup__form_type_add', '.profile__add-button');
 FormAddValidator.enableValidation()

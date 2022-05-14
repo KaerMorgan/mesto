@@ -52,14 +52,13 @@ export default class Api {
         headers: this._headers
       })
       .then(this._checkErorr)
-      .then(result => console.log(result))
       .catch(err => console.log(err))
   }
 
   // PATCH
   _changeUserInfo(userData) {
     return fetch(`${this._url}users/me`, {
-        method: 'GET',
+        method: 'PATCH',
         headers: {
           authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
           'Content-Type': 'application/json'

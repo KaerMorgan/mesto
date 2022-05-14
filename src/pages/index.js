@@ -18,7 +18,6 @@ export const api = new Api({
     authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3'
   }
 })
-api._getUserInfo();
 
 export const photoPreview = new PopupWithImage('.photo-view');
 photoPreview.setEventListeners()
@@ -26,7 +25,7 @@ photoPreview.setEventListeners()
 export const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
 
 function renderCard(cardData) {
-  // api._addCard().then
+  // api._addCard().then((cardData) => {})
   const card = new Card({ name: cardData.name, link: cardData.link, id: cardData.id }, "#card", () => {
     photoPreview.open({ name: cardData.name, link: cardData.link });
   });
@@ -36,11 +35,15 @@ function renderCard(cardData) {
 export const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   submitCallback: (userData) => {
-    profile.setUserInfo(userData);
-    popupEdit.close()
+    api._changeUserInfo(userData)
+      .then(() => {
+        profile.setUserInfo(userData);
+        popupEdit.close()
+      })
   }
 });
 popupEdit.setEventListeners()
+
 
 export const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
@@ -54,9 +57,12 @@ popupAdd.setEventListeners();
 
 export const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
-  submitCallback: (userData) => {
-    profile.setUserInfo(userData);
-    popupAvatar.close()
+  submitCallback: (avatar) => {
+    api._changeAvatar(avatar)
+      .then(() => {
+        profile.setAvatar(avatar);
+        popupAvatar.close()
+      })
   }
 });
 popupAvatar.setEventListeners();
@@ -79,12 +85,7 @@ FormEditValidator.enableValidation()
 const FormAvatarValidator = new FormValidator(formSelectors, '.popup__form_type_avatar', '.profile__avatar')
 FormAvatarValidator.enableValidation()
 
-// const initialCardList = new Section({
-//   data: initialCards,
-//   renderer: (cardData) => {
-//     initialCardList.addItem(renderCard(cardData));
-//   }
-// }, '.elements__grid')
+
 const initialCards = api._getCardList()
   .then((cardsData) => {
     const initialCardList = new Section({
@@ -95,4 +96,11 @@ const initialCards = api._getCardList()
       },
       '.elements__grid')
     initialCardList.renderItems();
+  })
+
+
+const initialProfile = api._getUserInfo()
+  .then((userData) => {
+    profile.setAvatar(userData)
+    profile.setUserInfo(userData)
   })

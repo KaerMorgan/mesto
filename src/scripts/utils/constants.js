@@ -17,8 +17,6 @@ export const editOccupationInput = formEdit.querySelector('#profile__about-input
 export const avatarMask = document.querySelector('.profile__avatar-mask')
 export const avatarСontainer = document.querySelector('.profile__avatar-container')
 
-export const profileId = { _id: '47bda8f44ba5fc95c27a71c9' }
-
 // Selectors for form validation
 export const formSelectors = {
   formSelector: '.popup__form',

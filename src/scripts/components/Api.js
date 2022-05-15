@@ -66,7 +66,6 @@ export default class Api {
         body: JSON.stringify(userData)
       })
       .then(this._checkErorr)
-      .then(result => console.log(result))
       .catch(err => console.log(err))
   }
 

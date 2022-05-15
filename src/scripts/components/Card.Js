@@ -1,12 +1,10 @@
-import { profileId } from "../utils/constants.js"
-
 export default class Card {
-  constructor(cardData, currentUser, templateSelector, handleCardClick, handleCardDelete, handleLikeCard) {
+  constructor(cardData, currentUser, templateSelector, handleClickCard, handleDeleteCard, handleLikeCard) {
     this._name = cardData.name
     this._link = cardData.link
     this._templateSelector = templateSelector
-    this._handleCardClick = handleCardClick
-    this._handleCardDelete = handleCardDelete
+    this._handleClickCard = handleClickCard
+    this._handleDeleteCard = handleDeleteCard
     this._handleLikeCard = handleLikeCard
     this._currentUser = currentUser
     this._cardOwner = cardData.owner._id
@@ -72,11 +70,11 @@ export default class Card {
     })
 
     this._cardDelete.addEventListener('click', () => {
-      this._handleCardDelete(this);
+      this._handleDeleteCard(this);
     })
 
     this._cardImage.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link)
+      this._handleClickCard(this._name, this._link)
     });
 
   }

@@ -82,7 +82,7 @@ export default class FormValidator {
       } else if (this._showFormButton.classList.contains('profile__add-button')) {
         this._toggleButtonState(inputList, buttonElement)
         popupAdd.open();
-      } else {
+      } else if (this._showFormButton.classList.contains('profile__avatar-container')) {
         this._toggleButtonState(inputList, buttonElement)
         popupAvatar.open();
       }

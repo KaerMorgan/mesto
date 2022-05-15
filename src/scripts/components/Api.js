@@ -8,7 +8,7 @@ export default class Api {
     if (res.ok) {
       return res.json()
     }
-    return Promise.reject('Ошибка');
+    return Promise.reject('Ошибка' + res.status);
   }
 
   // GET
@@ -95,7 +95,7 @@ export default class Api {
   }
 
   // DELETE
-  _removeLike() {
+  _removeLike(id) {
     return fetch(`${this._url}cards/${id}/likes`, {
         method: 'DELETE',
         headers: {

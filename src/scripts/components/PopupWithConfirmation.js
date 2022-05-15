@@ -13,12 +13,6 @@ export default class PopupWithConfirmation extends Popup {
     super.open()
   }
 
-  close() {
-    api._deleteCard(this._card._id)
-      .then(() => this._card._element.remove())
-      .then(() => super.close())
-  }
-
   setEventListeners() {
     this._submitButton.addEventListener('click', () => {
       this._submitCallback();

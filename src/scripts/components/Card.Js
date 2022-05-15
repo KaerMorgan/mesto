@@ -1,13 +1,39 @@
+import { profileId } from "../utils/constants.js"
+
 export default class Card {
-  constructor({ name, link, id, likes }, templateSelector, handleCardClick, handleCardDelete, handleLikeCard) {
-    this._name = name
-    this._link = link
+  constructor(cardData, currentUser, templateSelector, handleCardClick, handleCardDelete, handleLikeCard) {
+    this._name = cardData.name
+    this._link = cardData.link
     this._templateSelector = templateSelector
     this._handleCardClick = handleCardClick
     this._handleCardDelete = handleCardDelete
     this._handleLikeCard = handleLikeCard
-    this._id = id
-    this.likes = likes
+    this._currentUser = currentUser
+    this._cardOwner = cardData.owner._id
+    this._id = cardData._id
+    this._likes = cardData.likes
+  }
+
+  _checkLike() {
+    return this._likes.some(item => item._id === this._currentUser)
+  }
+
+  _setLikeState() {
+    if (this._checkLike()) {
+      this._setLike()
+    } else {
+      this._removeLike()
+    }
+  }
+
+  _setLike() {
+    this._cardLike.classList.add('element__like_pressed');
+    this._cardLikeCounter.textContent = this._likes.length;
+  }
+
+  _removeLike() {
+    this._cardLike.classList.remove('element__like_pressed');
+    this._cardLikeCounter.textContent = this._likes.length;
   }
 
   _getTemplate() {
@@ -25,11 +51,15 @@ export default class Card {
     this._cardLike = this._element.querySelector('.element__like');
     this._cardLikeCounter = this._element.querySelector('.element__like-counter');
     this._cardDelete = this._element.querySelector('.element__delete');
-
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardCaption.textContent = this._name;
-    this._cardLikeCounter.textContent = this.likes.length
+
+    if (this._cardOwner !== this._currentUser) {
+      this._cardDelete.remove()
+    }
+
+    this._setLikeState();
     this._setEventListeners();
 
     return this._element

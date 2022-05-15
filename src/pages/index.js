@@ -23,23 +23,6 @@ photoPreview.setEventListeners()
 
 export const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
 
-function renderCard(cardData) {
-  const card = new Card({ name: cardData.name, link: cardData.link, id: cardData._id, likes: cardData.likes },
-    "#card",
-    () => photoPreview.open({ name: cardData.name, link: cardData.link }),
-    (card) => popupDelete.open(card),
-    (card) => {
-      console.log(card)
-      card._element.querySelector('.element__like').classList.toggle('element__like_pressed');
-    }
-  )
-  console.log(card)
-  console.log(card._cardLike)
-    // if (card.likes.some(item => item._id === profileId._id)) { card._cardLike.classList.toggle('element__like_pressed') }
-
-  return card.generateCard();
-}
-
 export const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   submitCallback: (userData) => {
@@ -52,13 +35,14 @@ export const popupEdit = new PopupWithForm({
 });
 popupEdit.setEventListeners()
 
-
 export const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
   submitCallback: (cardData) => {
     api._addCard(cardData)
-    cardSection.addItem(renderCard(cardData));
-    popupAdd.close()
+      .then((responseWithCard) => {
+        cardSection.addItem(responseWithCard);
+        popupAdd.close()
+      })
   }
 });
 popupAdd.setEventListeners();
@@ -78,11 +62,14 @@ popupAvatar.setEventListeners();
 export const popupDelete = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
   submitCallback: () => {
-    popupDelete.close()
+    api._deleteCard(popupDelete._card._id)
+      .then(() => popupDelete._card._element.remove())
+      .then(() => popupDelete.close())
   }
 });
 popupDelete.setEventListeners();
 
+let cardSection
 
 const FormAddValidator = new FormValidator(formSelectors, '.popup__form_type_add', '.profile__add-button');
 FormAddValidator.enableValidation()
@@ -93,27 +80,39 @@ FormEditValidator.enableValidation()
 const FormAvatarValidator = new FormValidator(formSelectors, '.popup__form_type_avatar', '.profile__avatar')
 FormAvatarValidator.enableValidation()
 
-const cardSection = new Section({
-    data: {},
-    renderer: (cardData) => {
-      cardSection.addItem(renderCard(cardData));
-    }
-  },
-  '.elements__grid')
 
-api._getCardList()
-  .then((cardsData) => {
-    cardSection._renderedItems = cardsData.reverse() // Новые карточки добавляются в начало, а получаемый массив перебирается с конца. An elegant solution for more civilized times.😎
-    console.log(cardsData)
+
+Promise.all([api._getUserInfo(), api._getCardList()])
+  .then((promiseResponseArray) => {
+    profile.setAvatar(promiseResponseArray[0])
+    profile.setUserInfo(promiseResponseArray[0])
+    cardSection = new Section({
+        data: promiseResponseArray[1].reverse(), // Развернул массив, чтобы новые карточки добавлялись в начало. An elegant solution for more civilized times.😎
+        renderer: (cardData) => {
+          const card = new Card(cardData, promiseResponseArray[0]._id, "#card",
+            () => photoPreview.open({ name: cardData.name, link: cardData.link }),
+            (card) => popupDelete.open(card),
+            (card) => {
+              if (!card._checkLike()) {
+                // Запрос на лайк
+                api._likeCard(cardData._id)
+                  // Обновление массива с лайками
+                  .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
+                  // Отрисовка лайка и счётчика
+                  .then(() => card._setLike())
+              } else {
+                api._removeLike(cardData._id)
+                  .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
+                  .then(() => card._removeLike())
+              }
+            })
+          return card.generateCard();
+        }
+      },
+      '.elements__grid')
     cardSection.renderItems();
-  })
-
-const initialProfileLoad = api._getUserInfo()
-  .then((userData) => {
-    profile.setAvatar(userData)
-    profile.setUserInfo(userData)
-  })
-
+    // console.log(promiseResponseArray[1])
+  }).catch((err) => console.log(err));
 
 avatarСontainer.addEventListener('mouseenter', () => avatarMask.classList.add('profile__avatar-mask_active'))
 avatarСontainer.addEventListener('mouseleave', () => avatarMask.classList.remove('profile__avatar-mask_active'))

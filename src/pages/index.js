@@ -1,5 +1,5 @@
 // import '../pages/index.css'
-import { formSelectors } from '../scripts/utils/constants.js';
+import { formSelectors, avatarMask, avatarСontainer, profileId } from '../scripts/utils/constants.js';
 import Api from '../scripts/components/Api.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js'
@@ -9,7 +9,6 @@ import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.j
 import UserInfo from '../scripts/components/UserInfo.js';
 import FormValidator from "../scripts/components/FormValidator.js";
 // Popup initializers
-
 
 
 export const api = new Api({
@@ -25,19 +24,19 @@ photoPreview.setEventListeners()
 export const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
 
 function renderCard(cardData) {
-  const card = new Card({ name: cardData.name, link: cardData.link, id: cardData._id },
+  const card = new Card({ name: cardData.name, link: cardData.link, id: cardData._id, likes: cardData.likes },
     "#card",
-    () => {
-      photoPreview.open({ name: cardData.name, link: cardData.link })
-    },
-    (card) => {
-      popupDelete.open(card)
-    },
+    () => photoPreview.open({ name: cardData.name, link: cardData.link }),
+    (card) => popupDelete.open(card),
     (card) => {
       console.log(card)
       card._element.querySelector('.element__like').classList.toggle('element__like_pressed');
     }
   )
+  console.log(card)
+  console.log(card._cardLike)
+    // if (card.likes.some(item => item._id === profileId._id)) { card._cardLike.classList.toggle('element__like_pressed') }
+
   return card.generateCard();
 }
 
@@ -105,7 +104,7 @@ const cardSection = new Section({
 api._getCardList()
   .then((cardsData) => {
     cardSection._renderedItems = cardsData.reverse() // Новые карточки добавляются в начало, а получаемый массив перебирается с конца. An elegant solution for more civilized times.😎
-    console.log(cardSection._renderedItems)
+    console.log(cardsData)
     cardSection.renderItems();
   })
 
@@ -114,3 +113,7 @@ const initialProfileLoad = api._getUserInfo()
     profile.setAvatar(userData)
     profile.setUserInfo(userData)
   })
+
+
+avatarСontainer.addEventListener('mouseenter', () => avatarMask.classList.add('profile__avatar-mask_active'))
+avatarСontainer.addEventListener('mouseleave', () => avatarMask.classList.remove('profile__avatar-mask_active'))

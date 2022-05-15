@@ -25,10 +25,19 @@ photoPreview.setEventListeners()
 export const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
 
 function renderCard(cardData) {
-  // api._addCard().then((cardData) => {})
-  const card = new Card({ name: cardData.name, link: cardData.link, id: cardData.id }, "#card", () => {
-    photoPreview.open({ name: cardData.name, link: cardData.link });
-  });
+  const card = new Card({ name: cardData.name, link: cardData.link, id: cardData._id },
+    "#card",
+    () => {
+      photoPreview.open({ name: cardData.name, link: cardData.link })
+    },
+    (card) => {
+      popupDelete.open(card)
+    },
+    (card) => {
+      console.log(card)
+      card._element.querySelector('.element__like').classList.toggle('element__like_pressed');
+    }
+  )
   return card.generateCard();
 }
 
@@ -49,7 +58,7 @@ export const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
   submitCallback: (cardData) => {
     api._addCard(cardData)
-    initialCardList.addItem(renderCard(cardData));
+    cardSection.addItem(renderCard(cardData));
     popupAdd.close()
   }
 });
@@ -85,21 +94,22 @@ FormEditValidator.enableValidation()
 const FormAvatarValidator = new FormValidator(formSelectors, '.popup__form_type_avatar', '.profile__avatar')
 FormAvatarValidator.enableValidation()
 
+const cardSection = new Section({
+    data: {},
+    renderer: (cardData) => {
+      cardSection.addItem(renderCard(cardData));
+    }
+  },
+  '.elements__grid')
 
-const initialCards = api._getCardList()
+api._getCardList()
   .then((cardsData) => {
-    const initialCardList = new Section({
-        data: cardsData.map((item) => ({ name: item.name, link: item.link, id: item._id })),
-        renderer: (cardData) => {
-          initialCardList.addItem(renderCard(cardData));
-        }
-      },
-      '.elements__grid')
-    initialCardList.renderItems();
+    cardSection._renderedItems = cardsData.reverse() // Новые карточки добавляются в начало, а получаемый массив перебирается с конца. An elegant solution for more civilized times.😎
+    console.log(cardSection._renderedItems)
+    cardSection.renderItems();
   })
 
-
-const initialProfile = api._getUserInfo()
+const initialProfileLoad = api._getUserInfo()
   .then((userData) => {
     profile.setAvatar(userData)
     profile.setUserInfo(userData)

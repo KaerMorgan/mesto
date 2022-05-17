@@ -12,51 +12,47 @@ export default class Api {
   }
 
   // GET
-  _getCardList() {
+  getCardList() {
     return fetch(`${this._url}cards`, {
         method: 'GET',
         headers: this._headers
       })
       .then(this._checkErorr)
-      .catch(err => console.log(err))
   }
 
   // POST
-  _addCard(cardData) {
+  addCard(cardData) {
     return fetch(`${this._url}cards`, {
-        method: 'POST',
-        headers: {
-          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cardData)
-      }).then(this._checkErorr)
-      .catch(err => console.log(err))
+      method: 'POST',
+      headers: {
+        authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cardData)
+    }).then(this._checkErorr)
   }
 
   // DELETE cards/cardId
-  _deleteCard(id) {
+  deleteCard(id) {
     return fetch(`${this._url}cards/${id}`, {
-        method: 'DELETE',
-        headers: {
-          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
-        },
-      }).then(this._checkErorr)
-      .catch(err => console.log(err))
+      method: 'DELETE',
+      headers: {
+        authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+      },
+    }).then(this._checkErorr)
   }
 
   // GET
-  _getUserInfo() {
+  getUserInfo() {
     return fetch(`${this._url}users/me`, {
         method: 'GET',
         headers: this._headers
       })
       .then(this._checkErorr)
-      .catch(err => console.log(err))
   }
 
   // PATCH
-  _changeUserInfo(userData) {
+  changeUserInfo(userData) {
     return fetch(`${this._url}users/me`, {
         method: 'PATCH',
         headers: {
@@ -66,41 +62,37 @@ export default class Api {
         body: JSON.stringify(userData)
       })
       .then(this._checkErorr)
-      .catch(err => console.log(err))
   }
 
   // PATCH
-  _changeAvatar(avatar) {
+  changeAvatar(avatar) {
     return fetch(`${this._url}users/me/avatar`, {
-        method: 'PATCH',
-        headers: {
-          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(avatar)
-      }).then(this._checkErorr)
-      .catch(err => console.log(err))
+      method: 'PATCH',
+      headers: {
+        authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(avatar)
+    }).then(this._checkErorr)
   }
 
   // PUT
-  _likeCard(id) {
+  likeCard(id) {
     return fetch(`${this._url}cards/${id}/likes`, {
-        method: 'PUT',
-        headers: {
-          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
-        },
-      }).then(this._checkErorr)
-      .catch(err => console.log(err))
+      method: 'PUT',
+      headers: {
+        authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+      },
+    }).then(this._checkErorr)
   }
 
   // DELETE
-  _removeLike(id) {
+  removeLike(id) {
     return fetch(`${this._url}cards/${id}/likes`, {
-        method: 'DELETE',
-        headers: {
-          authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
-        },
-      }).then(this._checkErorr)
-      .catch(err => console.log(err))
+      method: 'DELETE',
+      headers: {
+        authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3',
+      },
+    }).then(this._checkErorr)
   }
 }

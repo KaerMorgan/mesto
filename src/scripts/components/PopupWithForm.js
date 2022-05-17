@@ -9,11 +9,11 @@ export default class PopupWithForm extends Popup {
     this._submitCallback = submitCallback;
   }
 
-  _setPending() {
+  setPending() {
     this._submitButton.textContent = 'Сохранение...'
   }
 
-  _removePending(text) {
+  removePending(text) {
     this._submitButton.textContent = text
   }
 

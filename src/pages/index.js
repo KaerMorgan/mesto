@@ -9,7 +9,26 @@ import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.j
 import UserInfo from '../scripts/components/UserInfo.js';
 import FormValidator from "../scripts/components/FormValidator.js";
 
-
+function createCard(cardData, currentUser) {
+  const card = new Card(cardData, currentUser, "#card",
+    () => photoPreview.open({ name: cardData.name, link: cardData.link }),
+    (card) => popupDelete.open(card),
+    (card) => {
+      if (!card.checkLike()) {
+        // Запрос на лайк
+        api.likeCard(cardData._id)
+          // Обновление массива с лайками
+          .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
+          // Отрисовка лайка и счётчика
+          .then(() => card.setLike())
+      } else {
+        api.removeLike(cardData._id)
+          .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
+          .then(() => card.removeLike())
+      }
+    })
+  return card.generateCard()
+}
 
 export const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-41/',
@@ -25,47 +44,49 @@ export const photoPreview = new PopupWithImage('.photo-view');
 export const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   submitCallback: (userData) => {
-    popupEdit._setPending()
-    api._changeUserInfo(userData)
+    popupEdit.setPending()
+    api.changeUserInfo(userData)
       .then((userData) => {
         profile.setUserInfo(userData)
-        popupEdit._removePending('Сохранить')
         popupEdit.close()
-      }).catch(err => console.log(err));
+      }).catch(err => console.log(err))
+      .finally(() => popupEdit.removePending('Сохранить'))
   }
 });
 
 export const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
   submitCallback: (cardData) => {
-    popupAdd._setPending()
-    api._addCard(cardData)
+    popupAdd.setPending()
+    api.addCard(cardData)
       .then((responseWithCard) => {
-        cardSection.addItem(responseWithCard);
-        popupAdd._removePending('Создать');
+        cardSection.addItem(createCard(responseWithCard, responseWithCard.owner._id));
         popupAdd.close();
-      }).catch(err => console.log(err));
+      }).catch(err => console.log(err))
+      .finally(() => popupAdd.removePending('Создать'))
+
   }
 });
 
 export const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   submitCallback: (avatar) => {
-    popupAvatar._setPending()
-    api._changeAvatar(avatar)
+    popupAvatar.setPending()
+    api.changeAvatar(avatar)
       .then(() => {
         profile.setAvatar(avatar);
-        popupAvatar._removePending('Сохранить')
         popupAvatar.close()
-      }).catch(err => console.log(err));
+      }).catch(err => console.log(err))
+      .finally(() => popupAvatar.removePending('Сохранить'))
+
   }
 });
 
 export const popupDelete = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
   submitCallback: () => {
-    api._deleteCard(popupDelete._card._id)
-      .then(() => popupDelete._card._element.remove())
+    api.deleteCard(popupDelete._card._id)
+      .then(() => popupDelete._card.deleteCard())
       .then(() => popupDelete.close())
       .catch(err => console.log(err));
   }
@@ -81,36 +102,19 @@ const FormAvatarValidator = new FormValidator(formSelectors, '.popup__form_type_
 FormAvatarValidator.enableValidation()
 
 let cardSection
-Promise.all([api._getUserInfo(), api._getCardList()])
+Promise.all([api.getUserInfo(), api.getCardList()])
   .then((promiseResponseArray) => {
     profile.setAvatar(promiseResponseArray[0])
     profile.setUserInfo(promiseResponseArray[0])
-    cardSection = new Section({
-        data: promiseResponseArray[1].reverse(), // Развернул массив, чтобы новые карточки добавлялись в начало. An elegant solution for more civilized times.😎
-        renderer: (cardData) => {
-          const card = new Card(cardData, promiseResponseArray[0]._id, "#card",
-            () => photoPreview.open({ name: cardData.name, link: cardData.link }),
-            (card) => popupDelete.open(card),
-            (card) => {
-              if (!card._checkLike()) {
-                // Запрос на лайк
-                api._likeCard(cardData._id)
-                  // Обновление массива с лайками
-                  .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
-                  // Отрисовка лайка и счётчика
-                  .then(() => card._setLike())
-              } else {
-                api._removeLike(cardData._id)
-                  .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
-                  .then(() => card._removeLike())
-              }
-            })
-          return card.generateCard();
-        }
-      },
-      '.elements__grid')
-    cardSection.renderItems();
+    cardSection = new Section(
+      (cardItem) => {
+        cardSection.addItem(createCard(cardItem, promiseResponseArray[0]._id))
+      }, '.elements__grid')
+    cardSection.renderItems(promiseResponseArray[1].reverse());
+
+
   }).catch(err => console.log(err));
+
 
 avatarСontainer.addEventListener('mouseenter', () => avatarMask.classList.add('profile__avatar-mask_active'));
 avatarСontainer.addEventListener('mouseleave', () => avatarMask.classList.remove('profile__avatar-mask_active'));

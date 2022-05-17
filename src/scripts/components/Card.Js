@@ -12,24 +12,24 @@ export default class Card {
     this._likes = cardData.likes
   }
 
-  _checkLike() {
+  checkLike() {
     return this._likes.some(item => item._id === this._currentUser)
   }
 
   _setLikeState() {
-    if (this._checkLike()) {
-      this._setLike()
+    if (this.checkLike()) {
+      this.setLike()
     } else {
-      this._removeLike()
+      this.removeLike()
     }
   }
 
-  _setLike() {
+  setLike() {
     this._cardLike.classList.add('element__like_pressed');
     this._cardLikeCounter.textContent = this._likes.length;
   }
 
-  _removeLike() {
+  removeLike() {
     this._cardLike.classList.remove('element__like_pressed');
     this._cardLikeCounter.textContent = this._likes.length;
   }
@@ -63,8 +63,11 @@ export default class Card {
     return this._element
   }
 
-  _setEventListeners() {
+  deleteCard() {
+    this._element.remove()
+  }
 
+  _setEventListeners() {
     this._cardLike.addEventListener('click', () => {
       this._handleLikeCard(this);
     })
@@ -76,6 +79,5 @@ export default class Card {
     this._cardImage.addEventListener('click', () => {
       this._handleClickCard(this._name, this._link)
     });
-
   }
 }

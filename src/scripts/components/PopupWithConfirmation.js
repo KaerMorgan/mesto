@@ -1,5 +1,4 @@
 import Popup from "./Popup.js";
-import { api } from "../../pages/index.js";
 
 export default class PopupWithConfirmation extends Popup {
   constructor({ popupSelector, submitCallback }) {

@@ -8,7 +8,7 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   open(card) {
-    this._card = card
+    this.card = card
     super.open()
   }
 

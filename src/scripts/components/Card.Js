@@ -9,11 +9,11 @@ export default class Card {
     this._currentUser = currentUser
     this._cardOwner = cardData.owner._id
     this._id = cardData._id
-    this._likes = cardData.likes
+    this.likes = cardData.likes
   }
 
   checkLike() {
-    return this._likes.some(item => item._id === this._currentUser)
+    return this.likes.some(item => item._id === this._currentUser)
   }
 
   _setLikeState() {
@@ -26,12 +26,12 @@ export default class Card {
 
   setLike() {
     this._cardLike.classList.add('element__like_pressed');
-    this._cardLikeCounter.textContent = this._likes.length;
+    this._cardLikeCounter.textContent = this.likes.length;
   }
 
   removeLike() {
     this._cardLike.classList.remove('element__like_pressed');
-    this._cardLikeCounter.textContent = this._likes.length;
+    this._cardLikeCounter.textContent = this.likes.length;
   }
 
   _getTemplate() {

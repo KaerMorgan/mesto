@@ -9,6 +9,8 @@ import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.j
 import UserInfo from '../scripts/components/UserInfo.js';
 import FormValidator from "../scripts/components/FormValidator.js";
 
+// Я не могу найти больше ни одного приватного метода :\
+
 function createCard(cardData, currentUser) {
   const card = new Card(cardData, currentUser, "#card",
     () => photoPreview.open({ name: cardData.name, link: cardData.link }),
@@ -18,28 +20,35 @@ function createCard(cardData, currentUser) {
         // Запрос на лайк
         api.likeCard(cardData._id)
           // Обновление массива с лайками
-          .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
+          .then((likeArrayResponse) => card.likes = likeArrayResponse.likes)
           // Отрисовка лайка и счётчика
           .then(() => card.setLike())
       } else {
         api.removeLike(cardData._id)
-          .then((likeArrayResponse) => card._likes = likeArrayResponse.likes)
+          .then((likeArrayResponse) => card.likes = likeArrayResponse.likes)
           .then(() => card.removeLike())
       }
     })
   return card.generateCard()
 }
 
-export const api = new Api({
+const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-41/',
   headers: {
     authorization: '1eb86aa4-a0d2-4f05-8adf-01200df0c7d3'
   }
 })
-export const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
+
+
+const cardSection = new Section(
+  (cardItem) => {
+    cardSection.addItem(createCard(cardItem, "47bda8f44ba5fc95c27a71c9"))
+  }, '.elements__grid')
+
+const profile = new UserInfo({ nameSelector: '#profile__name', aboutSelector: '#profile__about', avatarSelector: ".profile__avatar", api })
 
 // Popup initializers
-export const photoPreview = new PopupWithImage('.photo-view');
+const photoPreview = new PopupWithImage('.photo-view');
 
 export const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_edit',
@@ -82,11 +91,11 @@ export const popupAvatar = new PopupWithForm({
   }
 });
 
-export const popupDelete = new PopupWithConfirmation({
+const popupDelete = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
   submitCallback: () => {
-    api.deleteCard(popupDelete._card._id)
-      .then(() => popupDelete._card.deleteCard())
+    api.deleteCard(popupDelete.card._id)
+      .then(() => popupDelete.card.deleteCard())
       .then(() => popupDelete.close())
       .catch(err => console.log(err));
   }
@@ -101,18 +110,13 @@ FormEditValidator.enableValidation()
 const FormAvatarValidator = new FormValidator(formSelectors, '.popup__form_type_avatar', '.profile__avatar-container')
 FormAvatarValidator.enableValidation()
 
-let cardSection
+
+
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then((promiseResponseArray) => {
     profile.setAvatar(promiseResponseArray[0])
     profile.setUserInfo(promiseResponseArray[0])
-    cardSection = new Section(
-      (cardItem) => {
-        cardSection.addItem(createCard(cardItem, promiseResponseArray[0]._id))
-      }, '.elements__grid')
     cardSection.renderItems(promiseResponseArray[1].reverse());
-
-
   }).catch(err => console.log(err));
 
 
